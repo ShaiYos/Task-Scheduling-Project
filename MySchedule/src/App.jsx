@@ -7,9 +7,9 @@ import RegisterPage from '../client/pages/RegisterPage'
 import LandingPage from '../client/pages/LandingPage'
 import { ThemeContextProvider, useThemeContext } from './components/ThemeContext' 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import Button from '@mui/material/Button';
+import NightlightIcon from '@mui/icons-material/Nightlight';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 
 import './App.css'
@@ -21,15 +21,13 @@ function ThemeToggleButton() {
   const { mode, toggleTheme } = useThemeContext();
 
   return (
-      <Button
-          onClick={toggleTheme}
-          variant="contained"
-          color="secondary"
-          sx={{ position: 'absolute', top: 10, right: 10 }}
-      >
-          {mode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
-      </Button>
-  );
+    <IconButton
+        onClick={toggleTheme}
+        sx={{ position: 'absolute', top: 10, right: 10 }}
+    >
+        {mode === 'light' ? <WbSunnyIcon /> : <NightlightIcon />}
+    </IconButton>
+);
 }
 
 function App() {
@@ -37,7 +35,7 @@ function App() {
     
       <ThemeContextProvider>
         <ThemeToggleButton />
-          <Box sx={{ position: 'relative', height: '100vh' }}>
+          <Box id="root"sx={{ position: 'relative', height: '100vh' }}>
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
@@ -45,7 +43,6 @@ function App() {
                   <Route path="/register" element={<RegisterPage />} />
                 </Routes>
               </BrowserRouter>
-              {/* You can add other components here */}
           </Box>
       </ThemeContextProvider>
   );

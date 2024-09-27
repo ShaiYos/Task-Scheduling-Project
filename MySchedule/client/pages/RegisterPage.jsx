@@ -6,6 +6,8 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import EmailIcon from '@mui/icons-material/Email';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
@@ -13,6 +15,7 @@ export default function RegisterPage() {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const changeUsername = (e) => {
         const newValue = e.target.value;
@@ -46,10 +49,11 @@ export default function RegisterPage() {
         console.log("Password:", password);
         console.log("Repeat Password:", repeatPassword);
         setError("");
+        navigate('/login'); // Navigate to the login page after successful registration
     };
 
     return (
-        <Box sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, maxWidth: 300, mx: 'auto', mt: 5 }}>
+        <Box sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <Box sx={{ mb: 2 }}>

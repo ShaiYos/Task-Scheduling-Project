@@ -31,10 +31,8 @@ export default function LoginPage() {
     };
 
     return (
-        <Box sx={{ position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
-            
-                
-            
+        <Box sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
+
             <h2>Log In</h2>
             <form onSubmit={handleSubmit}>
                 <Box sx={{ mb: 2 }}>
