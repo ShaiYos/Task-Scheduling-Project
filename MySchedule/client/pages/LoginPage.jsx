@@ -32,9 +32,6 @@ export default function LoginPage() {
 
     return (
         <Box sx={{ position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
-            
-                
-            
             <h2>Log In</h2>
             <form onSubmit={handleSubmit}>
                 <Box sx={{ mb: 2 }}>

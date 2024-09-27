@@ -5,6 +5,7 @@ import ToDoList from './components/ToDoList'
 import LoginPage from '../client/pages/LoginPage'
 import RegisterPage from '../client/pages/RegisterPage'
 import LandingPage from '../client/pages/LandingPage'
+import TaskSchedulerPage from '../client/pages/TaskSchedulerPage'
 import { ThemeContextProvider, useThemeContext } from './components/ThemeContext' 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -34,13 +35,13 @@ function ThemeToggleButton() {
 
 function App() {
   return (
-    
       <ThemeContextProvider>
         <ThemeToggleButton />
           <Box sx={{ position: 'relative', height: '100vh' }}>
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
+                  <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
                 </Routes>
