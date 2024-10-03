@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useThemeContext } from '../../src/components/ThemeContext'; // Adjust the import path as needed
+import { useThemeContext } from '../src/components/ThemeContext'; // Adjust the import path as needed
 
 
 export default function LoginPage() {

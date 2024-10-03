@@ -1,27 +1,31 @@
+import { hashPassword } from "../utils/hashPassword.js";
+import { createUserService, getUserByUsername } from "../services/UserServices.js";
+import { serverResponse } from "../utils/serverResponse.js";
+import { comparePasswords } from "../utils/comparePaswwords.js";
 
 
 export const createUser = async (req, res) => {
-    console.log(req.body);
-    try {
+  console.log("Registration request received:", req.body);
+  try {
       const { username, email, password } = req.body;
-  
+
       // Check if user already exists
-      const existingUser =  await getUserByUsername(username);
+      const existingUser = await getUserByUsername(username);
       if (existingUser) {
-        return res.status(409).json({ error: 'User already exists' });
+          return res.status(409).json({ error: 'User already exists' });
       }
-  
-      // if not exist, create new user
-      const hashedPassword = hashPassword(password);
-      const newUser = await createUserService({ username, password: hashedPassword, email });
-  
+
+      // If not exist, create new user
+      const hashedPassword = await hashPassword(password);
+      const newUser = await createUserService({ username, email, password: hashedPassword });
+
       // Respond with the newly created user
       res.status(201).json(newUser);
-    } catch (error) {
+  } catch (error) {
       console.error('Error creating user:', error);
       res.status(500).json({ error: 'Server error' });
-    }
-  };
+  }
+};
 
   export const loginUser = async (req, res) => {
     try {
@@ -36,7 +40,7 @@ export const createUser = async (req, res) => {
         return serverResponse(res, 500, "Password not found for user");
       }
   
-      const isValidPassword = compareHashedPassword(password, user.password);
+      const isValidPassword = comparePasswords(password, user.password);
   
       if (isValidPassword) {
         

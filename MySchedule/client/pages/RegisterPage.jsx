@@ -7,7 +7,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
@@ -37,19 +39,37 @@ export default function RegisterPage() {
         setRepeatPassword(newValue);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== repeatPassword) {
             setError("Passwords do not match");
             return;
         }
-        // Handle registration logic here
-        console.log("Username:", username);
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Repeat Password:", repeatPassword);
-        setError("");
-        navigate('/login'); // Navigate to the login page after successful registration
+
+        try {
+            const response = await axios.post(`${BACKEND_URL}/register`, {
+                username: username.toLowerCase(),
+                email,
+                password,
+            });
+
+            if (response.status === 201) {
+                setError("");
+                navigate('/login');
+            } else {
+                throw new Error("Registration failed");
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response.status === 409) {
+                    setError("User already registered");
+                } else {
+                    setError("Registration failed");
+                }
+            } else {
+                setError("Something went wrong");
+            }
+        }
     };
 
     return (

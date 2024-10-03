@@ -1,6 +1,6 @@
 
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 //const passport  = require('passport')
 const Schema = mongoose.Schema;
 //const passportLocalMongoose = require('passport-local-mongoose');

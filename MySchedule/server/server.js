@@ -1,21 +1,23 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
+import UserRoutes from './routes/UserRoutes.js'; 
 const port = 3000;
 const app = express();
 
-app.use(cors());  // Enables CORS
-app.use(express.json());
+app.use(cors());
+app.use(express.json()); // Parses incoming JSON requests
 
-app.listen(port, async () => {
-    try {
-      await mongoose.connect("mongodb+srv://admin:admin@cluster0.ebnx4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      console.log(`MySchedule app listening on port ${port}!`);
-    } catch (e) {
-      console.log("Error connecting to database:", e);
-    }
+// Connect to MongoDB
+
+const dbURI = 'mongodb+srv://admin:admin@cluster0.ebnx4.mongodb.net/TaskScheduling?retryWrites=true&w=majority&appName=Cluster0';
+mongoose.connect(dbURI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error) => console.log('Error connecting to MongoDB:', error));
+
+// Define routes
+app.use('/', UserRoutes); 
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
