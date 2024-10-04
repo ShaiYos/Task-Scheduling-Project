@@ -5,13 +5,15 @@ import PersonIcon from '@mui/icons-material/Person';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useThemeContext } from '../src/components/ThemeContext'; // Adjust the import path as needed
+import { useThemeContext } from '../src/components/ThemeContext'; 
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { mode, toggleTheme } = useThemeContext();
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const changeUsername = (e) => {
         const newValue = e.target.value;
