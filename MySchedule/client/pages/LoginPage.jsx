@@ -30,6 +30,7 @@ export default function LoginPage() {
         // Handle login logic here
         console.log("Username:", username);
         console.log("Password:", password);
+        navigate('/task-scheduler');
     };
 
     return (
