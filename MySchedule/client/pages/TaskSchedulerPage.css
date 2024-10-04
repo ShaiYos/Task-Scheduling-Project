@@ -1,0 +1,175 @@
+/* TaskSchedulerPage.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+
+/* dark mode styles */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+/* light mode styles */
+ .light-mode {
+    background-color: #eeeeee;
+ }
+
+/* tasks list syles in dark mode */
+.dark-mode .task-item {
+    border-color: #adadad;
+    background-color: #444;
+}
+
+/* tasks list syles in light mode */
+.light-mode .task-item {
+    border-color: #7a7a7a;
+    background-color: #fff;
+}
+
+/* input fileds and buttons styles in dark mode */
+.dark-mode input, .dark-mode button {
+    background-color: #555;
+    color: #fff;
+    border: 1px solid #7a7a7a;
+}
+
+/* buttons styles in light mode */
+ .light-mode button {
+    background-color: #eeeeee;
+    color: #000;
+    border: 1px solid #868686;
+}
+
+/* input fileds and add task button in light mode */
+.light-mode input, .light-mode .addTaskButton  {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #868686;
+}
+
+
+
+/* title of the calender style in dark mode */
+.dark-mode .rbc-calendar {
+    background-color: #333;
+    color: #fff;
+}
+
+/* title of the calender style in light mode */
+.light-mode .rbc-calendar {
+    background-color: #eeeeee;
+    color: #000;
+}
+
+/* event styles in dark mode */
+.dark-mode .rbc-event {
+    background-color: #222;
+    color: #fff;
+}
+
+/* event styles in light mode */
+.light-mode .rbc-event {
+    background-color: #e0dddd;
+    color: #555;
+}
+
+/* toolbar styles in dark mode */
+.dark-mode .rbc-toolbar button {
+    background-color: #555;
+    color: #fff;
+    border: 1px solid #777;
+}
+
+/* toolbar styles in light mode */
+.light-mode .rbc-toolbar button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #7a7a7a;
+}
+
+/* days bg color in dark mode */
+.dark-mode .rbc-day-bg {
+    background-color: #444;
+    border-color: #fff;
+}
+/* days bg color in light mode */
+.light-mode .rbc-day-bg {
+    background-color: #fff;
+    border-color: #d3d2d2;
+}
+
+/* today bg color in dark mode */
+.dark-mode .rbc-today {
+    background-color: #adadad;
+}
+
+/* today bg color in light mode */
+.light-mode .rbc-today {
+    background-color: #868383;
+}
+
+
+/* For light mode, ensure the icon is black */
+.light-mode input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
+}
+
+/* For dark mode, ensure the icon is white */
+.dark-mode input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(0); 
+}
+
+/* Added styles for days that belong to another month in light mode*/
+.light-mode .rbc-off-range-bg {
+    background-color: #e0e0e0;
+}
+
+/* Added styles for days that belong to another month in dark mode*/
+.dark-mode .rbc-off-range-bg {
+    background-color: #5e5d5d;
+    color: #bbb;
+}
