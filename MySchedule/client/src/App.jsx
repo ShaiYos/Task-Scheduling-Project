@@ -2,9 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import ToDoList from './components/ToDoList'
-import LoginPage from '../pages/LoginPage'
-import RegisterPage from '../pages/RegisterPage'
-import LandingPage from '../pages/LandingPage'
+import LoginPage from '../client/pages/LoginPage'
+import RegisterPage from '../client/pages/RegisterPage'
+import LandingPage from '../client/pages/LandingPage'
+import TaskSchedulerPage from '../client/pages/TaskSchedulerPage'
 import { ThemeContextProvider, useThemeContext } from './components/ThemeContext' 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NightlightIcon from '@mui/icons-material/Nightlight';
@@ -32,13 +33,13 @@ function ThemeToggleButton() {
 
 function App() {
   return (
-    
       <ThemeContextProvider>
         <ThemeToggleButton />
           <Box id="root"sx={{ position: 'relative', height: '100%' }}>
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
+                  <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
                 </Routes>
