@@ -27,29 +27,32 @@ export const createUser = async (req, res) => {
   }
 };
 
-  export const loginUser = async (req, res) => {
-    try {
+export const loginUser = async (req, res) => {
+  console.log("login request received:", req.body);
+  try {
       const { username, password } = req.body;
+
+      // Fetch the user by username
       const user = await getUserByUsername(username);
-  
+
       if (!user) {
-        return serverResponse(res, 404, "User not found");
+          // User not found
+          return serverResponse(res, 401, "Invalid username or password");
       }
-  
-      if (user.password === undefined) {
-        return serverResponse(res, 500, "Password not found for user");
-      }
-  
+
+      // Compare passwords
       const isValidPassword = comparePasswords(password, user.password);
-  
-      if (isValidPassword) {
-        
-        return serverResponse(res, 200, user);
-      } else {
-        return serverResponse(res, 401, "Invalid password");
+
+      if (!isValidPassword) {
+          // Password is incorrect
+          return serverResponse(res, 401, "Invalid username or password");
       }
-    } catch (error) {
+
+      // If authentication is successful, respond with user data (avoid sending password)
+      return serverResponse(res, 200, { message: "Login successful", userId: user._id });
+  } catch (error) {
       console.error("Error in loginUser:", error);
       return serverResponse(res, 500, error.message);
-    }
-}
+  }
+};
+

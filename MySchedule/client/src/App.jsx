@@ -14,29 +14,28 @@ import Box from '@mui/material/Box';
 
 import './App.css'
 
-
-
-
+// Component for theme toggle button (Light/Dark mode)
 function ThemeToggleButton() {
-  const { mode, toggleTheme } = useThemeContext();
+  const { mode, toggleTheme } = useThemeContext(); // Access theme mode and toggle function
 
   return (
     <IconButton
         onClick={toggleTheme}
         sx={{ position: 'absolute', top: 10, right: 10 }}
-    >
+    >   {/* Icon changes based on the current theme (light or dark) */}
         {mode === 'light' ? <WbSunnyIcon /> : <NightlightIcon />}
     </IconButton>
 );
 }
 
+// Main application component
 function App() {
   return (
       <ThemeContextProvider>
-        <ThemeToggleButton />
+        <ThemeToggleButton /> {/* Add the theme toggle button */}
           <Box id="root"sx={{ position: 'relative', height: '100%' }}>
-              <BrowserRouter>
-                <Routes>
+              <BrowserRouter> {/* Wrapping components with BrowserRouter for routing */}
+                <Routes> {/* Define the different routes for the app */}
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
                   <Route path="/login" element={<LoginPage />} />

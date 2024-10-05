@@ -1,8 +1,6 @@
 import { UserModel } from "../models/UserModel.js";
 
 
-
-
 //export const getAllUsersService = () => UserModel.find({});
 
 // service to get specific user by his id

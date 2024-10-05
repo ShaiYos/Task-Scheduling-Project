@@ -9,6 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 
+// Backend URL from environment variable
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function RegisterPage() {
@@ -17,60 +18,60 @@ export default function RegisterPage() {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); // Hook to navigate to a different route
 
+    // Update username state
     const changeUsername = (e) => {
         const newValue = e.target.value;
         setUsername(newValue);
     };
-
+    // Update email state
     const changeEmail = (e) => {
         const newValue = e.target.value;
         setEmail(newValue);
     };
-
+    // Update password state
     const changePassword = (e) => {
         const newValue = e.target.value;
         setPassword(newValue);
     };
-
+    // Update repeatPassword state
     const changeRepeatPassword = (e) => {
         const newValue = e.target.value;
         setRepeatPassword(newValue);
     };
-
+    // Handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (password !== repeatPassword) {
-            setError("Passwords do not match");
-            return;
-        }
-
+        e.preventDefault(); // Prevent default form submission behavior (page reload)
+    
         try {
-            const response = await axios.post(`${BACKEND_URL}/register`, {
-                username: username.toLowerCase(),
-                email,
+            // Send a POST request to the backend to log in the user
+            const response = await axios.post(`${BACKEND_URL}/login`, {
+                username: username.toLowerCase(), // Lowercase username for consistency
                 password,
             });
-
-            if (response.status === 201) {
-                setError("");
-                navigate('/login');
+    
+            // If login is successful, navigate to the task scheduler page
+            if (response.status === 200) {
+                setError(""); // Clear any existing error messages
+                navigate('/task-scheduler'); // Redirect to the task scheduler page
             } else {
-                throw new Error("Registration failed");
+                throw new Error("Login failed");
             }
         } catch (error) {
+            // Handle different error responses
             if (axios.isAxiosError(error)) {
-                if (error.response.status === 409) {
-                    setError("User already registered");
+                if (error.response?.status === 401) {
+                    setError("Invalid username or password"); // Handle invalid credentials
                 } else {
-                    setError("Registration failed");
+                    setError("Login failed"); // Generic error message for other status codes
                 }
             } else {
-                setError("Something went wrong");
+                setError("Something went wrong"); // Handle non-Axios errors
             }
         }
     };
+    
 
     return (
         <Box sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
