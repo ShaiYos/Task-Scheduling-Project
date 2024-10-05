@@ -1,0 +1,61 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease;
+}
+
+.register-box {
+    /* border: 1px solid var(--border-color); */
+    /* border-radius: 10px; */
+    padding: 20px;
+    /* background-color: var(--box-background-color); */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    
+    /* color: var(--text-color); */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* register title */
+.register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.light-mode {
+    /* --background-color: #f9f9f9; */
+    /* --box-background-color: #fff; */
+    /* --border-color: #ccc; */
+    /* --text-color: #000; */
+}
+
+.dark-mode {
+    --background-color: #121212;
+    --box-background-color: #1e1e1e;
+    --border-color: #333;
+    --text-color: #fff;
+}
+
+.MuiInputBase-root {
+    /* color: var(--text-color); */
+}
+
+.MuiInputLabel-root {
+    /* color: var(--text-color); */
+}
+
+.MuiOutlinedInput-notchedOutline {
+    /* border-color: var(--border-color); */
+}
+
+.MuiButton-containedPrimary {
+    /* background-color: #007bff; */
+}
+
+.MuiButton-containedPrimary:hover {
+    /* background-color: #0056b3; */
+}

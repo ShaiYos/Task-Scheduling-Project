@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import LoginPage from '../pages/LoginPage'
-import RegisterPage from '../pages/RegisterPage'
-import LandingPage from '../pages/LandingPage'
-import TaskSchedulerPage from '../pages/TaskSchedulerPage'
+import LoginPage from '../pages/LoginPage/LoginPage'
+import RegisterPage from '../pages/RegisterPage/RegisterPage'
+import LandingPage from '../pages/LandingPage/LandingPage'
+import TaskSchedulerPage from '../pages/TaskSchedulerPage/TaskSchedulerPage'
 import { ThemeContextProvider, useThemeContext } from './components/ThemeContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NightlightIcon from '@mui/icons-material/Nightlight';
