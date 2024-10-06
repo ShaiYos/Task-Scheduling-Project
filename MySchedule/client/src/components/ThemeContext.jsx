@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo, useContext } from 'react';
+import { createContext, useState, useMemo, useContext, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -11,6 +11,14 @@ export const useThemeContext = () => useContext(ThemeContext);
 // Context provider component to wrap around parts of the app that need access to the theme
 export const ThemeContextProvider = ({ children }) => {
     const [mode, setMode] = useState('light'); // State to track the current theme mode ('light' or 'dark')
+
+    // Retrieve the saved theme from local storage on initial load
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setMode(savedTheme);
+        }
+    }, []);
 
     // Memoize the theme object to avoid unnecessary recalculations when mode changes
     const theme = useMemo(
@@ -25,7 +33,11 @@ export const ThemeContextProvider = ({ children }) => {
 
     // Function to toggle between light and dark mode
     const toggleTheme = () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => {
+            const newMode = prevMode === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newMode); // Save the new mode to local storage
+            return newMode;
+        });
     };
 
     return (

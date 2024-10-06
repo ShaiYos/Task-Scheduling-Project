@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useThemeContext } from '../../src/components/ThemeContext'; 
+import { useThemeContext } from '../../src/components/ThemeContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 
@@ -35,10 +35,10 @@ export default function LoginPage() {
         e.preventDefault(); // Prevent default form submission behavior (page reload)
         try {
             const response = await axios.post(`${BACKEND_URL}/login`, {
-                username : username.toLowerCase(), // Lowercase username for consistency,
+                username: username.toLowerCase(), // Lowercase username for consistency,
                 password,
             });
-        
+
             if (response.status === 200) {
                 console.log("Login successful", response.data);
                 navigate('/task-scheduler');
@@ -54,7 +54,7 @@ export default function LoginPage() {
             }
         }
     };
-    
+
 
 
     return (

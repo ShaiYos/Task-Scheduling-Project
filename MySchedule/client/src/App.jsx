@@ -20,30 +20,30 @@ function ThemeToggleButton() {
 
   return (
     <IconButton
-        onClick={toggleTheme}
-        sx={{ position: 'absolute', top: 10, right: 10 }}
+      onClick={toggleTheme}
+      sx={{ position: 'absolute', top: 10, right: 10 }}
     >   {/* Icon changes based on the current theme (light or dark) */}
-        {mode === 'light' ? <WbSunnyIcon /> : <NightlightIcon />}
+      {mode === 'light' ? <WbSunnyIcon /> : <NightlightIcon />}
     </IconButton>
-);
+  );
 }
 
 // Main application component
 function App() {
   return (
-      <ThemeContextProvider>
-        <ThemeToggleButton /> {/* Add the theme toggle button */}
-          <Box id="root"sx={{ position: 'relative', height: '100%' }}>
-              <BrowserRouter> {/* Wrapping components with BrowserRouter for routing */}
-                <Routes> {/* Define the different routes for the app */}
-                  <Route path="/" element={<LandingPage />} />
-                  <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                </Routes>
-              </BrowserRouter>
-          </Box>
-      </ThemeContextProvider>
+    <ThemeContextProvider>
+      <ThemeToggleButton /> {/* Add the theme toggle button */}
+      <Box id="root" sx={{ position: 'relative', height: '100%' }}>
+        <BrowserRouter> {/* Wrapping components with BrowserRouter for routing */}
+          <Routes> {/* Define the different routes for the app */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </BrowserRouter>
+      </Box>
+    </ThemeContextProvider>
   );
 }
 
