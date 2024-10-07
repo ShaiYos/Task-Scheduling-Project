@@ -1,14 +1,101 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import { useThemeContext } from '../src/components/ThemeContext';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './TaskSchedulerPage.css';
+//import { Calendar, momentLocalizer } from 'react-big-calendar';
+//import moment from 'moment';
+//import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { formatDate } from '@fullcalendar/core'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import './styles.css';
 
-const TaskSchedulerPage = () => {
+
+const Calendar = () => {
+    const calendarRef = useRef(null);  // To access FullCalendar instance
+
+    const handleDateClick = (info) => {
+      // Get the calendar API and change the view to 'dayGridDay' when a day is clicked
+      let calendarApi = calendarRef.current.getApi();
+      calendarApi.changeView('timeGridDay', info.dateStr);  // Switch to day view
+    };
+
+    const handleSelect = (selectInfo) => {
+        if (calendarRef.current.getApi().view.type === 'timeGridDay') {
+            const title = prompt('Enter Event Title:');  // Prompt for event title
+            if (title) {
+            const calendarApi = calendarRef.current.getApi();
+            calendarApi.addEvent({
+                title,
+                start: selectInfo.startStr,
+                end: selectInfo.endStr,
+                allDay: selectInfo.allDay,  // Handle all-day events
+            });
+            calendarApi.unselect();  // Clear the selection
+            }
+        }
+    };
+
+    return (
+        <div className = "calendar-container">
+            <FullCalendar
+                ref={calendarRef}
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                height={'600px'}
+                initialView="dayGridMonth"
+                views={{
+                    timeGridDay: {
+                        type: 'timeGrid',
+                        duration: { days: 1 },
+                    }}
+                }
+                headerToolbar={{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                }}
+                events={[
+                    { title: 'Event 1', date: '2024-10-08' },
+                    { title: 'Event 2', date: '2024-10-12' }
+                ]}
+                editable={true}
+                eventStartEditable={true}
+                eventResizableFromStart={true}
+                dateClick={handleDateClick}     // Handle date click to switch views
+                selectable={true}                // Enable selecting time slots
+                select={handleSelect}            // Handle time slot selection
+                className="calendar"
+            />
+        </div>
+    );
+}
+    
+export default Calendar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* const TaskSchedulerPage = () => {
     const { mode, toggleTheme } = useThemeContext();
-    const localizer = momentLocalizer(moment);
+    // const localizer = momentLocalizer(moment);
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
     const [dueDate, setDueDate] = useState('');
@@ -50,8 +137,21 @@ const TaskSchedulerPage = () => {
     };
 
     const today = new Date().toISOString().split('T')[0];
-
     return (
+        <div style={{ width: '100%', height: '100vh' }}>
+        <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            }}
+        />
+        </div>
+    );
+}
+    /* return (
         <div className={`container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`} >
             <h1>Weekly Task Scheduler</h1>
             <ul className="task-list">
@@ -114,6 +214,8 @@ const TaskSchedulerPage = () => {
             />
         </div>
     );
-};
+}; 
 
-export default TaskSchedulerPage;
+export default TaskSchedulerPage; */
+
+

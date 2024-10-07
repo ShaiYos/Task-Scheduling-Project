@@ -1,0 +1,13 @@
+/* styles.css */
+.calendar-container {
+    width: 100%;           /* Full width */
+    height: 100vh;        /* Full height of the viewport */
+    display: flex;        /* Use flexbox to center the calendar */
+    justify-content: center; /* Center horizontally */
+    align-items: center;  /* Center vertically */
+  }
+  
+  .fullcalendar {
+    width: 100%;          /* Full width of the parent container */
+    height: 100%;         /* Full height of the parent container */
+  }

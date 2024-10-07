@@ -46,7 +46,6 @@ button {
 }
 
 
-
 /* dark mode styles */
 .dark-mode {
     background-color: #333;
@@ -99,7 +98,7 @@ button {
 
 /* title of the calender style in light mode */
 .light-mode .rbc-calendar {
-    background-color: #dddddd;
+    background-color: #ffffff;
     color: #000;
 }
 
@@ -126,7 +125,7 @@ button {
 .light-mode .rbc-toolbar button {
     background-color: #fff;
     color: #000;
-    border: 1px solid #7a7a7a;
+    border: 1px solid #070101;
 }
 
 /* days bg color in dark mode */
@@ -137,9 +136,6 @@ button {
 /* days bg color in light mode */
 .light-mode .rbc-day-bg {
     background-color: #fff;
-    /* border-color: #d3d2d2; */
-    
-
 }
 
 /* today bg color in dark mode */
@@ -165,7 +161,7 @@ button {
 
 /* Added styles for days that belong to another month in light mode*/
 .light-mode .rbc-off-range-bg {
-    background-color: #e0e0e0;
+    background-color: #c7c7c7;
 }
 
 /* Added styles for days that belong to another month in dark mode*/
