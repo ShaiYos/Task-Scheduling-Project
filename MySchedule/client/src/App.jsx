@@ -1,18 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import LoginPage from '../pages/LoginPage/LoginPage'
-import RegisterPage from '../pages/RegisterPage/RegisterPage'
-import LandingPage from '../pages/LandingPage/LandingPage'
-import TaskSchedulerPage from '../pages/TaskSchedulerPage/TaskSchedulerPage'
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import LandingPage from '../pages/LandingPage/LandingPage';
+import TaskSchedulerPage from '../pages/TaskSchedulerPage/TaskSchedulerPage';
 import { ThemeContextProvider, useThemeContext } from './components/ThemeContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
+import AuthWrapper from './components/AuthWrapper/AuthWrapper.jsx';
 
-import './App.css'
+import './App.css';
 
 // Component for theme toggle button (Light/Dark mode)
 function ThemeToggleButton() {
@@ -37,7 +37,7 @@ function App() {
         <BrowserRouter> {/* Wrapping components with BrowserRouter for routing */}
           <Routes> {/* Define the different routes for the app */}
             <Route path="/" element={<LandingPage />} />
-            <Route path="/task-scheduler" element={<TaskSchedulerPage />} />
+            <Route path="/task-scheduler" element={<AuthWrapper><TaskSchedulerPage /></AuthWrapper>} /> {/* Wrap TaskSchedulerPage with AuthWrapper */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
@@ -47,4 +47,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

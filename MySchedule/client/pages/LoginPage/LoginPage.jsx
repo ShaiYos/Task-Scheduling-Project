@@ -41,6 +41,9 @@ export default function LoginPage() {
 
             if (response.status === 200) {
                 console.log("Login successful", response.data);
+                // Store user data in local storage
+                localStorage.setItem('user', JSON.stringify(response.data));
+                console.log("Stored user data:", localStorage.getItem('user')); // Add this line
                 navigate('/task-scheduler');
             }
         } catch (error) {

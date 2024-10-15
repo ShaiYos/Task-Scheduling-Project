@@ -1,0 +1,84 @@
+/* AuthWrapper.css */
+
+/* Increase font size for the Alert text */
+.alert-box .MuiAlert-message {
+    font-size: 1.2rem;
+}
+
+/* Styles for the alert box */
+.alert-box {
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px;
+    position: fixed;
+    /* top: 50%; */
+    /* left: 50%; */
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    font-size: 1.2rem;
+
+}
+
+/* Light Mode Styles */
+.light-mode .alert-box {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+/* Dark Mode Styles */
+.dark-mode .alert-box {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+/* Button styles */
+.alert-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f39c12;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+/* Light mode button styles */
+.light-mode .alert-button {
+    background-color: #f39c12;
+}
+
+.light-mode .alert-button:hover {
+    background-color: #e67e22;
+}
+
+/* Dark mode button styles */
+.dark-mode .alert-button {
+    background-color: #ff9800;
+}
+
+.dark-mode .alert-button:hover {
+    background-color: #f57c00;
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    /* Default button color for toggle */
+    color: white;
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
+}
+
+.theme-toggle:hover {
+    background-color: #2980b9;
+}

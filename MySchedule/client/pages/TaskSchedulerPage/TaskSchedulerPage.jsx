@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useThemeContext } from '../../src/components/ThemeContext'; // Import the ThemeContext
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './TaskSchedulerPage.css';
 
 // Main component for the task scheduler page
 const TaskSchedulerPage = () => {
-    const { mode, toggleTheme } = useThemeContext(); // Accessing the theme (dark/light) from ThemeContex
+    const { mode } = useThemeContext(); // Accessing the theme (dark/light) from ThemeContext
     const localizer = momentLocalizer(moment); // Initializing the localizer to handle date formatting with moment.js
     const [tasks, setTasks] = useState([]); // Array of tasks
     const [newTask, setNewTask] = useState(''); // Input for new task
@@ -42,8 +41,8 @@ const TaskSchedulerPage = () => {
     // Handler to save the edited task
     const handleSaveEdit = (e) => {
         e.preventDefault();
-         // Update the task at the editingIndex with new title and due date
-        const updatedTasks = tasks.map((task, index) => 
+        // Update the task at the editingIndex with new title and due date
+        const updatedTasks = tasks.map((task, index) =>
             index === editingIndex ? { ...task, title: editingTask, dueDate: new Date(editingDueDate) } : task
         );
         setTasks(updatedTasks);
