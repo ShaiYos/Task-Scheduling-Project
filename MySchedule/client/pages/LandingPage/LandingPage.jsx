@@ -7,7 +7,7 @@ const LandingPage = () => {
     const { mode } = useThemeContext(); // Get the current theme mode
 
     return (
-        <div className={`container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}> {/* Main container for the page */}
+        <div className={`container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
             <h1 className="title">Welcome to Task Scheduling Web App</h1>
             <div className="description">
                 Your ultimate tool for managing and scheduling your tasks efficiently. Our app offers a minimalistic design and user-friendly interface to help you stay organized and productive.
