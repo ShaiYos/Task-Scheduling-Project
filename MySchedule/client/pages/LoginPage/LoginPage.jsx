@@ -7,17 +7,18 @@ import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useThemeContext } from '../../src/components/ThemeContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Link from '@mui/material/Link';
 import axios from 'axios';
 
+import "./LoginPage.css"; // Import the new CSS file
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Backend URL from environment variables
-
 
 export default function LoginPage() {
     const [username, setUsername] = useState(""); // state variable to manage username
     const [password, setPassword] = useState(""); // state variable to manage password
     const [error, setError] = useState(""); // State to track error messages
-    const { mode, toggleTheme } = useThemeContext(); // Accessing theme context for light/dark mode
+    const { mode } = useThemeContext(); // Accessing theme context for light/dark mode
     const navigate = useNavigate(); // Hook to navigate to another route
 
     // Update the username state
@@ -58,53 +59,67 @@ export default function LoginPage() {
         }
     };
 
-
+    // Handler for navigating to the registration page
+    const handleRegister = () => {
+        navigate('/register'); // Navigate to the register page
+    };
 
     return (
-        <Box sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300, mx: 'auto', mt: 5 }}>
-            <h2>Log In</h2>
-            <form onSubmit={handleSubmit}>
-                <Box sx={{ mb: 2 }}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Username"
-                        variant="outlined"
-                        value={username}
-                        name="username"
-                        onChange={changeUsername}
-                        fullWidth
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <PersonIcon />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                    <TextField
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        name="password"
-                        onChange={changePassword}
-                        fullWidth
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <LockOpenIcon />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Box>
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Log In
-                </Button>
-            </form>
+        <Box className={`centered-box ${mode}`}>
+            <Box
+                sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300 }}
+            >
+                <h2 className="login-title">Log In</h2>
+                <form onSubmit={handleSubmit}>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            id="outlined-basic"
+                            label="Username"
+                            variant="outlined"
+                            value={username}
+                            name="username"
+                            onChange={changeUsername}
+                            fullWidth
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            id="outlined-password-input"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            value={password}
+                            name="password"
+                            onChange={changePassword}
+                            fullWidth
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LockOpenIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Box>
+                    {error && <Box sx={{ color: 'red', mb: 2 }}>{error}</Box>}
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Log In
+                    </Button>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
+                        <p style={{ marginRight: 5 }}>Don't have an account?</p>
+                        <Link href="#" onClick={handleRegister} underline="hover">
+                            {'Register'}
+                        </Link>
+                    </Box>
+                </form>
+            </Box>
         </Box>
     );
 }

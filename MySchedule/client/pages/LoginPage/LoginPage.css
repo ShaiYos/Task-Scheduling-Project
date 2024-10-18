@@ -1,14 +1,14 @@
 /* RegisterPage.css */
-
 html,
 body {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    /* Prevent scrolling */
 }
 
 .light {
-    background-color: #d4d4d4;
+    background-color: #eaeaea;
     color: black;
 }
 
@@ -31,20 +31,12 @@ body {
 /* Specific styles for input labels and icons */
 .light .MuiInputLabel-root,
 .light .MuiSvgIcon-root {
-    color: rgb(46, 46, 46);
+    color: black;
 }
 
 .dark .MuiInputLabel-root,
 .dark .MuiSvgIcon-root {
     color: white;
-}
-
-/* Center the Box component */
-.centered-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
 }
 
 /* Specific styles for the register title and button */
@@ -57,3 +49,11 @@ body {
 .dark .MuiButton-root {
     color: white;
 } */
+
+/* Center the Box component */
+.centered-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
