@@ -39,21 +39,77 @@ body {
     color: white;
 }
 
-/* Specific styles for the register title and button */
-/* .light .register-title,
-.light .MuiButton-root {
-    color: black;
+
+
+/* autofill styles */
+.light input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #eaeaea inset !important;
+    -webkit-text-fill-color: black !important;
+    caret-color: black !important;
 }
 
-.dark .register-title,
-.dark .MuiButton-root {
+
+
+.dark input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #444 inset !important;
+    -webkit-text-fill-color: white !important;
+    caret-color: white !important;
+}
+  
+.light .loginButton {
+    background-color: #007bff;
     color: white;
-} */
-
-/* Center the Box component */
-.centered-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
+
+.light .loginButton:hover {
+    background-color: #005fc4; /* A darker shade of blue */
+    cursor: pointer; /* Changes cursor to pointer when hovering */
+}
+  
+
+.dark .loginButton {
+    background-color: #747bff; /* Dark button background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dark .loginButton:hover {
+    background-color: #575bb1; /* Darker shade for hover effect */
+    cursor: pointer;
+}
+
+/* Link styles in light mode */
+.light .registerLink {
+    color: #007bff; 
+    text-decoration: none; 
+    transition: color 0.3s; 
+}
+
+.light .registerLink:hover {
+    color: #005fc4;
+    text-decoration: underline; 
+}
+
+/* Link styles in dark mode */
+.dark .registerLink {
+    color: #747bff; 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dark .registerLink:hover {
+    color: #575bb1; 
+    text-decoration: underline;
+}
+

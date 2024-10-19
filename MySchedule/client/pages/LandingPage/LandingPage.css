@@ -59,28 +59,28 @@
 }
 
 /* Dark mode styles */
-.dark-mode {
+.dark {
     background-color: #333;
     color: #fff;
 }
 
-.dark-mode .title {
+.dark .title {
     color: #fff;
 }
 
-.dark-mode .description {
+.dark .description {
     color: #ccc;
 }
 
-.dark-mode .features {
+.dark .features {
     color: #ddd;
 }
 
-.dark-mode .button {
+.dark .button {
     background-color: #747bff;
 }
 
-.dark-mode .button:hover {
+.dark .button:hover {
     background-color: #575bb1;
     color: #fff;
 }

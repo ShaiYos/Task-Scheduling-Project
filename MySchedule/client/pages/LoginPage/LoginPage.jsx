@@ -65,10 +65,18 @@ export default function LoginPage() {
     };
 
     return (
-        <Box className={`centered-box ${mode}`}>
-            <Box
-                sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300 }}
-            >
+        <Box 
+            className={`centered-box ${mode}`} 
+            sx={{
+            border: mode === 'light' ? '1px solid #444' : '1px solid #eaeaea', 
+            borderRadius: '20px', 
+            p: 3, 
+            position: 'relative', 
+            width: 350
+        }}
+        >
+        
+            <Box>
                 <h2 className="login-title">Log In</h2>
                 <form onSubmit={handleSubmit}>
                     <Box sx={{ mb: 2 }}>
@@ -86,6 +94,16 @@ export default function LoginPage() {
                                         <PersonIcon />
                                     </InputAdornment>
                                 ),
+                            }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
                             }}
                         />
                     </Box>
@@ -106,15 +124,25 @@ export default function LoginPage() {
                                     </InputAdornment>
                                 ),
                             }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
+                            }}
                         />
                     </Box>
                     {error && <Box sx={{ color: 'red', mb: 2 }}>{error}</Box>}
-                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                    <Button className="loginButton" type="submit" variant="contained" color="primary" fullWidth>
                         Log In
                     </Button>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
                         <p style={{ marginRight: 5 }}>Don't have an account?</p>
-                        <Link href="#" onClick={handleRegister} underline="hover">
+                        <Link className="registerLink" onClick={handleRegister} underline="hover">
                             {'Register'}
                         </Link>
                     </Box>

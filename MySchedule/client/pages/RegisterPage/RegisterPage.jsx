@@ -63,10 +63,17 @@ export default function RegisterPage() {
     };
 
     return (
-        <Box className={`centered-box ${mode}`}>
-            <Box
-                sx={{ border: 1, borderColor: 'grey.500', borderRadius: 2, p: 3, position: 'relative', maxWidth: 300 }}
-            >
+        <Box 
+            className={`centered-box ${mode}`} 
+            sx={{
+            border: mode === 'light' ? '1px solid #444' : '1px solid #eaeaea', 
+            borderRadius: '20px', 
+            p: 3, 
+            position: 'relative', 
+            width: 350
+        }}
+        >
+            <Box>
                 <h2>Register</h2>
                 <form onSubmit={handleSubmit}>
                     <Box sx={{ mb: 2 }}>
@@ -84,6 +91,16 @@ export default function RegisterPage() {
                                         <PersonIcon />
                                     </InputAdornment>
                                 ),
+                            }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
                             }}
                         />
                     </Box>
@@ -103,6 +120,16 @@ export default function RegisterPage() {
                                     </InputAdornment>
                                 ),
                             }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
+                            }}
                         />
                     </Box>
                     <Box sx={{ mb: 2 }}>
@@ -120,6 +147,16 @@ export default function RegisterPage() {
                                         <LockOpenIcon />
                                     </InputAdornment>
                                 ),
+                            }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
                             }}
                         />
                     </Box>
@@ -139,15 +176,25 @@ export default function RegisterPage() {
                                     </InputAdornment>
                                 ),
                             }}
+                            sx={{
+                                '& .MuiOutlinedInput-root.Mui-focused': {
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' ? '#747bff' : '#007bff;'
+                                    },
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
+                                    color: mode === 'dark' ? '#747bff' : '#007bff;'
+                                },
+                            }}
                         />
                     </Box>
                     {error && <Box sx={{ color: 'red', mb: 2 }}>{error}</Box>}
-                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                    <Button className="registerButton" type="submit" variant="contained" color="primary" fullWidth>
                         Register
                     </Button>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
                         <p style={{ marginRight: 5 }}>Already have an account?</p>
-                        <Link href="#" onClick={() => navigate('/login')} underline="hover">
+                        <Link className="loginLink" onClick={() => navigate('/login')} underline="hover">
                             {'Login'}
                         </Link>
                     </Box>
