@@ -9,6 +9,7 @@ import { useThemeContext } from '../../src/components/ThemeContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import { useLoginContext } from "../../src/components/LoginContext";
 
 import "./LoginPage.css"; // Import the new CSS file
 
@@ -20,6 +21,7 @@ export default function LoginPage() {
     const [error, setError] = useState(""); // State to track error messages
     const { mode } = useThemeContext(); // Accessing theme context for light/dark mode
     const navigate = useNavigate(); // Hook to navigate to another route
+    const { loginUser } = useLoginContext(); // Access loginUser from context
 
     // Update the username state
     const changeUsername = (e) => {
@@ -42,9 +44,7 @@ export default function LoginPage() {
 
             if (response.status === 200) {
                 console.log("Login successful", response.data);
-                // Store user data in local storage
-                localStorage.setItem('user', JSON.stringify(response.data));
-                console.log("Stored user data:", localStorage.getItem('user')); // Add this line
+                loginUser(response.data); // Call loginUser from context to update the state
                 navigate('/task-scheduler');
             }
         } catch (error) {

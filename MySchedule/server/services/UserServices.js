@@ -10,6 +10,16 @@ export const getUserByIdService = async (userId) => UserModel.findById(userId);
 export const createUserService = async (user) => UserModel.create(user);
 
 // service to check if the username is unique
-export const getUserByUsername = async (username) =>
-  UserModel.findOne({ username: username });
-
+export const getUserByUsername = async (username) => {
+  try {
+    if (!username) {
+      throw new Error('Username is required');
+    }
+    
+    const user = await UserModel.findOne({ username });
+    return user;
+  } catch (error) {
+    console.error("Error finding user by username:", error);
+    throw new Error('Could not fetch user');
+  }
+};
