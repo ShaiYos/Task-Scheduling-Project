@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useThemeContext } from '../../src/components/ThemeContext'; // Import the ThemeContext
 import TaskForm from '../../src/components/TaskForm';
 import TaskCalendar from '../../src/components/TaskCalendar';
@@ -11,6 +11,8 @@ const TaskSchedulerPage = () => {
     const [editingIndex, setEditingIndex] = useState(null); // Index of task being edited
     const [editingTask, setEditingTask] = useState(''); // Edited task title
     const [editingDueDate, setEditingDueDate] = useState(''); // Edited due date
+
+    const calendarRef = useRef(null);  // To access FullCalendar instance
 
     // Handler to add or edit a task
     const handleAddOrEditTask = (title, dueDate) => {
@@ -50,6 +52,28 @@ const TaskSchedulerPage = () => {
         setTasks(tasks.filter((task, i) => i !== index));
     };
 
+    const handleDateClick = (info) => {
+        // Get the calendar API and change the view to 'dayGridDay' when a day is clicked
+        let calendarApi = calendarRef.current.getApi();
+        calendarApi.changeView('timeGridDay', info.dateStr);  // Switch to day view
+    };
+
+    const handleSelect = (selectInfo) => {
+        if (calendarRef.current.getApi().view.type === 'timeGridDay') {
+            const title = prompt('Enter Event Title:');  // Prompt for event title
+            if (title) {
+                const calendarApi = calendarRef.current.getApi();
+                calendarApi.addEvent({
+                    title,
+                    start: selectInfo.startStr,
+                    end: selectInfo.endStr,
+                    allDay: selectInfo.allDay,  // Handle all-day events
+                });
+                calendarApi.unselect();  // Clear the selection
+            }
+        }
+    };
+
     return (
         <div className={`container ${mode}`}>
             <div className="task-scheduler-box">
@@ -76,7 +100,12 @@ const TaskSchedulerPage = () => {
                     setEditingDueDate={setEditingDueDate}
                     setEditingIndex={setEditingIndex}
                 />
-                <TaskCalendar tasks={tasks} mode={mode} />
+                <TaskCalendar
+                    tasks={tasks}
+                    handleDateClick={handleDateClick}
+                    handleSelect={handleSelect}
+                    mode={mode}
+                />
             </div>
         </div>
     );

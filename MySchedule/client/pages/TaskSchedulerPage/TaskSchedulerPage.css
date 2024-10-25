@@ -173,3 +173,39 @@ button {
     background-color: #5e5d5d;
     color: #bbb;
 }
+
+/* TaskSchedulerPage.css */
+
+/* Light Mode Styles */
+.container.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.fc-light-mode .task-form input, .fc-light-mode .p-calendar {
+    background-color: #f9f9f9;
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+.fc-light-mode .p-calendar .p-inputtext {
+    background-color: #ffffff; /* Ensure the input area is visible */
+    color: #000;
+}
+
+/* Dark Mode Styles */
+.container.dark {
+    background-color: #2e2e2e;
+    color: #f0f0f0;
+}
+
+.fc-dark-mode .task-form input, .fc-dark-mode .p-calendar {
+    background-color: #444444; /* Darker background for inputs */
+    color: #f0f0f0;
+    border: 1px solid #666;
+}
+
+.fc-dark-mode .p-calendar .p-inputtext {
+    background-color: #333333; /* Input area should also have a dark background */
+    color: #f0f0f0;
+}
