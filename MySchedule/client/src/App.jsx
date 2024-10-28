@@ -26,7 +26,7 @@ function ThemeToggleButton() {
       onClick={toggleTheme}
       sx={{ position: 'absolute', top: 10, right: 10 }}
     >   {/* Icon changes based on the current theme (light or dark) */}
-      {mode === 'light' ? <WbSunnyIcon /> : <NightlightIcon />}
+      {mode === 'light' ? <NightlightIcon /> : <WbSunnyIcon />}
     </IconButton>
   );
 }
@@ -37,7 +37,7 @@ function App() {
     <ThemeContextProvider>
       <LoginProvider> {/* Wrap the app with LoginContext */}
         <ThemeToggleButton />
-        <Box id="root" sx={{ position: 'relative', height: '100%' }}>
+        <Box id="root" sx={{ position: 'relative' }}>
           <BrowserRouter>
             <LogoutButton />
             <Routes>
