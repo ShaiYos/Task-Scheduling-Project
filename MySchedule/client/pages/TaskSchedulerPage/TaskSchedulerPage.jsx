@@ -1,77 +1,52 @@
 import React, { useState, useRef } from 'react';
-import { useThemeContext } from '../../src/components/ThemeContext'; // Import the ThemeContext
+import { useThemeContext } from '../../src/components/ThemeContext';
 import TaskForm from '../../src/components/TaskForm';
 import TaskCalendar from '../../src/components/TaskCalendar';
 import './TaskSchedulerPage.css';
 
-// Main component for the task scheduler page
 const TaskSchedulerPage = () => {
-    const { mode } = useThemeContext(); // Accessing the theme (dark/light) from ThemeContext
-    const [tasks, setTasks] = useState([]); // Array of tasks
-    const [editingIndex, setEditingIndex] = useState(null); // Index of task being edited
-    const [editingTask, setEditingTask] = useState(''); // Edited task title
-    const [editingDueDate, setEditingDueDate] = useState(''); // Edited due date
+    const { mode } = useThemeContext();
+    const [tasks, setTasks] = useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [editingTask, setEditingTask] = useState('');
+    const [editingDueDate, setEditingDueDate] = useState('');
+    const [isFormVisible, setFormVisible] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(null);
 
-    const calendarRef = useRef(null);  // To access FullCalendar instance
-
-    // Handler to add or edit a task
     const handleAddOrEditTask = (title, dueDate) => {
         if (editingIndex !== null) {
-            // Update the task at the editingIndex with new title and due date
             const updatedTasks = tasks.map((task, index) =>
                 index === editingIndex ? { ...task, title, dueDate: new Date(dueDate) } : task
             );
             setTasks(updatedTasks);
-            setEditingIndex(null); // Reset editing state
+            setEditingIndex(null);
             setEditingTask('');
             setEditingDueDate('');
         } else {
-            // Create a new task object with title, due date, and finished status
             const task = { title, dueDate: new Date(dueDate), finished: false };
-            setTasks([...tasks, task]);  // Add new task to the tasks array
+            setTasks([...tasks, task]);
         }
+        setFormVisible(false);  // Hide the form after submission
     };
 
-    // Handler to delete a task based on its index
     const handleDeleteTask = (index) => {
-        // Remove task at the specified index from tasks array
         setTasks(tasks.filter((task, i) => i !== index));
     };
 
-    // Handler to start editing a task
     const handleEditTask = (index) => {
-        setEditingIndex(index); // Set the index of the task being edited
-        setEditingTask(tasks[index].title); // Set task title for editing
-        // Set task due date for editing (convert date to ISO string format)
+        setEditingIndex(index);
+        setEditingTask(tasks[index].title);
         setEditingDueDate(tasks[index].dueDate.toISOString().slice(0, 16));
+        setFormVisible(true);  // Show the form when editing
     };
 
-    // Handler to mark a task as finished (removes the task)
     const handleMarkAsFinished = (index) => {
-        // Remove the task when marked as finished
         setTasks(tasks.filter((task, i) => i !== index));
     };
 
-    const handleDateClick = (info) => {
-        // Get the calendar API and change the view to 'dayGridDay' when a day is clicked
-        let calendarApi = calendarRef.current.getApi();
-        calendarApi.changeView('timeGridDay', info.dateStr);  // Switch to day view
-    };
-
-    const handleSelect = (selectInfo) => {
-        if (calendarRef.current.getApi().view.type === 'timeGridDay') {
-            const title = prompt('Enter Event Title:');  // Prompt for event title
-            if (title) {
-                const calendarApi = calendarRef.current.getApi();
-                calendarApi.addEvent({
-                    title,
-                    start: selectInfo.startStr,
-                    end: selectInfo.endStr,
-                    allDay: selectInfo.allDay,  // Handle all-day events
-                });
-                calendarApi.unselect();  // Clear the selection
-            }
-        }
+    const handleDateClick = (date) => {
+        setSelectedDate(date.dateStr);  // Update to selected date
+        setFormVisible(true);  // Show the form when a date is clicked
     };
 
     return (
@@ -91,19 +66,20 @@ const TaskSchedulerPage = () => {
                         </li>
                     ))}
                 </ul>
-                <TaskForm
-                    onSubmit={handleAddOrEditTask}
-                    editingIndex={editingIndex}
-                    editingTask={editingTask}
-                    editingDueDate={editingDueDate}
-                    setEditingTask={setEditingTask}
-                    setEditingDueDate={setEditingDueDate}
-                    setEditingIndex={setEditingIndex}
-                />
+                {isFormVisible && (
+                    <TaskForm
+                        onSubmit={handleAddOrEditTask}
+                        editingIndex={editingIndex}
+                        editingTask={editingTask}
+                        editingDueDate={editingDueDate || selectedDate}
+                        setEditingTask={setEditingTask}
+                        setEditingDueDate={setEditingDueDate}
+                        setEditingIndex={setEditingIndex}
+                    />
+                )}
                 <TaskCalendar
                     tasks={tasks}
-                    handleDateClick={handleDateClick}
-                    handleSelect={handleSelect}
+                    handleDateClick={handleDateClick}  // Pass the date click handler
                     mode={mode}
                 />
             </div>

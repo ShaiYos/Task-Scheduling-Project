@@ -1,11 +1,4 @@
 /* RegisterPage.css */
-html,
-body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    /* Prevent scrolling */
-}
 
 .light {
     background-color: #eaeaea;
@@ -55,7 +48,7 @@ body {
     -webkit-text-fill-color: white !important;
     caret-color: white !important;
 }
-  
+
 .light .loginButton {
     background-color: #007bff;
     color: white;
@@ -68,13 +61,13 @@ body {
 }
 
 .light .loginButton:hover {
-    background-color: #005fc4; /* A darker shade of blue */
-    cursor: pointer; /* Changes cursor to pointer when hovering */
+    background-color: #005fc4;
+    cursor: pointer;
 }
-  
+
 
 .dark .loginButton {
-    background-color: #747bff; /* Dark button background */
+    background-color: #747bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -85,31 +78,67 @@ body {
 }
 
 .dark .loginButton:hover {
-    background-color: #575bb1; /* Darker shade for hover effect */
+    background-color: #575bb1;
     cursor: pointer;
 }
 
 /* Link styles in light mode */
 .light .registerLink {
-    color: #007bff; 
-    text-decoration: none; 
-    transition: color 0.3s; 
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .light .registerLink:hover {
     color: #005fc4;
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
 /* Link styles in dark mode */
 .dark .registerLink {
-    color: #747bff; 
+    color: #747bff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .dark .registerLink:hover {
-    color: #575bb1; 
+    color: #575bb1;
     text-decoration: underline;
 }
 
+
+.input-container {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    /* overflow: hidden; */
+    /* Ensures that the inner elements don’t overflow the container */
+}
+
+/* Dark mode styles for input container */
+.dark .input-container {
+    background-color: #444;
+    color: white;
+}
+
+/* Light mode styles for input container */
+.light .input-container {
+    background-color: #eaeaea;
+    color: black;
+}
+
+.input-container .icon {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container .input-field {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    padding: 10px;
+    width: 100%;
+}

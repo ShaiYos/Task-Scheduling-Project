@@ -1,42 +1,43 @@
 import React, { useState } from 'react';
-import { Calendar } from 'primereact/calendar'; // Import Calendar component from PrimeReact
-// import './TaskForm.css'; // Add your styles for the form
 
-const TaskForm = ({ onSubmit, editingIndex, editingTask, editingDueDate, setEditingTask, setEditingDueDate }) => {
-    const [datetime24h, setDateTime24h] = useState(editingDueDate ? new Date(editingDueDate) : null); // State for the date-time picker
+const TaskForm = ({ onSubmit, editingTask, setEditingTask, onClose }) => {
+    const [time, setTime] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!editingTask || !datetime24h) {
-            alert('Please provide both task title and due date!');
+        if (!editingTask || !time) {
+            alert('Please provide both task title and time!');
             return;
         }
-        onSubmit(editingTask, datetime24h);  // Submit the task with title and selected date
+        const [hours, minutes] = time.split(':');
+        const dueTime = new Date();
+        dueTime.setHours(hours, minutes);
+        onSubmit(editingTask, dueTime);
         setEditingTask('');
-        setDateTime24h(null); // Reset form after submission
+        setTime('');
     };
 
     return (
         <form onSubmit={handleSubmit} className="task-form">
             <div>
-                <label>Task Title</label>
+                <label>Event Description</label>
                 <input
                     type="text"
                     value={editingTask}
                     onChange={(e) => setEditingTask(e.target.value)}
-                    placeholder="Enter task title"
+                    placeholder="Enter event description"
                 />
             </div>
             <div>
-                <label>Due Date</label>
-                <Calendar
-                    value={datetime24h}
-                    onChange={(e) => setDateTime24h(e.value)} // Set the selected date and time
-                    showTime
-                    hourFormat="24" // Ensure 24-hour format
+                <label>Time</label>
+                <input
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                 />
             </div>
-            <button type="submit">{editingIndex !== null ? 'Update Task' : 'Add Task'}</button>
+            <button type="submit">Add / Update Event</button>
+            <button type="button" onClick={onClose}>Cancel</button>
         </form>
     );
 };

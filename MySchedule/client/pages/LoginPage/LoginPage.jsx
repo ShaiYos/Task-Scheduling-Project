@@ -65,17 +65,17 @@ export default function LoginPage() {
     };
 
     return (
-        <Box 
-            className={`centered-box ${mode}`} 
+        <Box
+            className={`centered-box ${mode}`}
             sx={{
-            border: mode === 'light' ? '1px solid #444' : '1px solid #eaeaea', 
-            borderRadius: '20px', 
-            p: 3, 
-            position: 'relative', 
-            width: 350
-        }}
+                border: mode === 'light' ? '1px solid #444' : '1px solid #eaeaea',
+                borderRadius: '20px',
+                p: 3,
+                position: 'relative',
+                width: 350,
+            }}
         >
-        
+
             <Box>
                 <h2 className="login-title">Log In</h2>
                 <form onSubmit={handleSubmit}>

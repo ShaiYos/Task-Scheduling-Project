@@ -1,12 +1,5 @@
 /* RegisterPage.css */
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
 .light {
     background-color: #d4d4d4;
     color: black;
@@ -44,14 +37,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    /* height: 100%; */
     border: none;
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
- 
+
 .light .registerButton {
     background-color: #007bff;
     color: white;
@@ -64,13 +57,16 @@ body {
 }
 
 .light .registerButton:hover {
-    background-color: #005fc4; /* A darker shade of blue */
-    cursor: pointer; /* Changes cursor to pointer when hovering */
+    background-color: #005fc4;
+    /* A darker shade of blue */
+    cursor: pointer;
+    /* Changes cursor to pointer when hovering */
 }
-  
+
 
 .dark .registerButton {
-    background-color: #747bff; /* Dark button background */
+    background-color: #747bff;
+    /* Dark button background */
     color: white;
     border: none;
     border-radius: 5px;
@@ -81,31 +77,31 @@ body {
 }
 
 .dark .registerButton:hover {
-    background-color: #575bb1; /* Darker shade for hover effect */
+    background-color: #575bb1;
+    /* Darker shade for hover effect */
     cursor: pointer;
 }
 
 /* Link styles in light mode */
 .light .loginLink {
-    color: #007bff; 
-    text-decoration: none; 
-    transition: color 0.3s; 
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .light .loginLink:hover {
     color: #005fc4;
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
 /* Link styles in dark mode */
 .dark .loginLink {
-    color: #747bff; 
+    color: #747bff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .dark .loginLink:hover {
-    color: #575bb1; 
+    color: #575bb1;
     text-decoration: underline;
 }
-

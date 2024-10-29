@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useThemeContext } from '../../src/components/ThemeContext'; 
+import { useThemeContext } from '../../src/components/ThemeContext';
 import './LandingPage.css'; // Import the CSS file for styling
 
 const LandingPage = () => {
     const { mode } = useThemeContext(); // Get the current theme mode
 
     return (
-        <div className={`container ${mode}`}>
+        <div className={`LandingPageContainer ${mode}`}
+            style={{
+                border: mode === 'light' ? '1px solid #444' : '1px solid #eaeaea',
+            }}
+        >
             <h1 className="title">Welcome to Task Scheduling Web App</h1>
             <div className="description">
                 Your ultimate tool for managing and scheduling your tasks efficiently. Our app offers a minimalistic design and user-friendly interface to help you stay organized and productive.
