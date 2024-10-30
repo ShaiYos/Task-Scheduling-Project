@@ -1,5 +1,5 @@
 import { hashPassword } from "../utils/hashPassword.js";
-import { createUserService, getUserByUsername } from "../services/UserServices.js";
+import { createUserService, getUserByUsernameService } from "../services/UserServices.js";
 import { serverResponse } from "../utils/serverResponse.js";
 import { comparePasswords } from "../utils/comparePaswwords.js";
 
@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
       const { username, email, password } = req.body;
 
       // Check if user already exists
-      const existingUser = await getUserByUsername(username);
+      const existingUser = await getUserByUsernameService(username);
       if (existingUser) {
           return res.status(409).json({ error: 'User already exists' });
       }
@@ -33,7 +33,7 @@ export const loginUser = async (req, res) => {
       const { username, password } = req.body;
 
       // Fetch the user by username
-      const user = await getUserByUsername(username);
+      const user = await getUserByUsernameService(username);
 
       if (!user) {
           // User not found
