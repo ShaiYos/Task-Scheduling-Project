@@ -1,18 +1,26 @@
-import { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
+// Create the Login Context
 const LoginContext = createContext();
 
+// Login Provider Component
 export const LoginProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const loginUser = (user) => {
+    // Check local storage for logged-in state
+    useEffect(() => {
+        const userLoggedIn = localStorage.getItem('loggedIn') === 'true';
+        setLoggedIn(userLoggedIn);
+    }, []);
+
+    const loginUser = () => {
         setLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('loggedIn', 'true'); // Store logged-in state
     };
 
     const logoutUser = () => {
         setLoggedIn(false);
-        localStorage.removeItem('user');
+        localStorage.setItem('loggedIn', 'false'); // Clear logged-in state
     };
 
     return (
@@ -22,4 +30,5 @@ export const LoginProvider = ({ children }) => {
     );
 };
 
+// Custom hook to use Login Context
 export const useLoginContext = () => useContext(LoginContext);
