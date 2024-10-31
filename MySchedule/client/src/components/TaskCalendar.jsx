@@ -3,9 +3,11 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { useLoginContext } from './LoginContext'; // Import useLoginContext
 
 const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDoubleClick, mode, onEventDrop }) => {
     const calendarRef = useRef(null);
+    const { userId } = useLoginContext(); // Get userId from context
 
     return (
         <div className={`calendar-container ${mode}`}>
@@ -18,11 +20,14 @@ const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDou
                 eventClick={handleEventClick}
                 eventDrop={onEventDrop} // Add the eventDrop handler here
                 eventDoubleClick={handleEventDoubleClick}
-                events={tasks.map(task => ({
-                    title: task.title,
-                    start: new Date(task.dueDate),
-                    end: new Date(task.dueDate),
-                }))}
+                events={tasks
+                    .filter(task => task.userId === userId) // Filter tasks by userId
+                    .map(task => ({
+                        title: task.description,
+                        start: new Date(task.dueDate),
+                        end: new Date(task.dueDate),
+                    }))
+                }
                 eventTimeFormat={{
                     hour: '2-digit',
                     minute: '2-digit',

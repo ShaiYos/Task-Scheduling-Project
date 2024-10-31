@@ -1,20 +1,22 @@
-import TaskModel from '../models/TaskModel';
+import { TaskModel } from '../models/TaskModel.js';
 
 // Function to add a new task
-const addTask = async (userId, description, date) => {
-    const newTask = new Task({
+export const addTaskService = async (userId, description, date) => {
+    console.log(`Adding task for userId: ${userId}, description: ${description}, date: ${date}`);
+    const newTask = new TaskModel({
         description,
-        date: new Date(date), // Ensure date is a Date object,
+        dueDate: new Date(date), // Ensure date is a Date object without adding 3 hours
         finished: false, // New tasks are not finished by default
-        user: userId, // Reference to the user who created the task
+        userId, // Reference to the user who created the task
     });
 
     return await newTask.save(); // Save and return the new task
 };
 
 // Function to edit an existing task
-const editTask = async (taskId, updates) => {
-    const updatedTask = await Task.findByIdAndUpdate(taskId, updates, {
+export const editTaskService = async (taskId, updates) => {
+    console.log(`Editing task with taskId: ${taskId}, updates: ${JSON.stringify(updates)}`);
+    const updatedTask = await TaskModel.findByIdAndUpdate(taskId, updates, {
         new: true, // Return the updated document
         runValidators: true, // Ensure validators run on update
     });
@@ -23,20 +25,21 @@ const editTask = async (taskId, updates) => {
 };
 
 // Function to mark a task as finished
-const markTaskAsFinished = async (taskId) => {
-    return await Task.findByIdAndUpdate(taskId, { finished: true }, { new: true });
+export const markTaskAsFinishedService = async (taskId) => {
+    console.log(`Marking task as finished with taskId: ${taskId}`);
+    return await TaskModel.findByIdAndUpdate(taskId, { finished: true }, { new: true });
 };
 
 // Function to delete a task
-const deleteTask = async (taskId) => {
-    await Task.findByIdAndDelete(taskId);
+export const deleteTaskService = async (taskId) => {
+    console.log(`Deleting task with taskId: ${taskId}`);
+    await TaskModel.findByIdAndDelete(taskId);
     return { message: 'Task deleted successfully' };
 };
 
-// Export the task services
-module.exports = {
-    addTask,
-    editTask,
-    markTaskAsFinished,
-    deleteTask,
+// Function to fetch all tasks for a specific user
+export const getAllTasksService = async (userId) => {
+    console.log(`Fetching all tasks for userId: ${userId}`);
+    return await TaskModel.find({ userId });
 };
+

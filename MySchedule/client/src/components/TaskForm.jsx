@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLoginContext } from './LoginContext'; // Import useLoginContext
 
 const AddTaskForm = ({ onSubmit, onClose, selectedDate }) => {
     const [task, setTask] = useState('');
@@ -6,6 +7,7 @@ const AddTaskForm = ({ onSubmit, onClose, selectedDate }) => {
     const [date, setDate] = useState('');
     const [minTime, setMinTime] = useState('00:00');
     const [maxTime, setMaxTime] = useState('23:59');
+    const { userId } = useLoginContext(); // Get userId from context
 
     useEffect(() => {
         if (selectedDate) {
@@ -30,7 +32,7 @@ const AddTaskForm = ({ onSubmit, onClose, selectedDate }) => {
         const [hours, minutes] = time.split(':');
         const dueTime = new Date(selectedDate);
         dueTime.setHours(hours, minutes);
-        onSubmit(task, dueTime);
+        onSubmit(task, dueTime, userId); // Pass userId to onSubmit
         setTask('');
         setTime('');
     };
@@ -46,7 +48,6 @@ const AddTaskForm = ({ onSubmit, onClose, selectedDate }) => {
                     placeholder="Enter event description"
                 />
             </div>
-            {/* Removed Date input */}
             <div>
                 <label>Time</label>
                 <input
@@ -68,6 +69,7 @@ const EditTaskForm = ({ onSubmit, editingTask, setEditingTask, editingDueDate, s
     const [date, setDate] = useState('');
     const [minTime, setMinTime] = useState('00:00');
     const [maxTime, setMaxTime] = useState('23:59');
+    const { userId } = useLoginContext(); // Get userId from context
 
     useEffect(() => {
         if (editingDueDate) {
@@ -93,7 +95,7 @@ const EditTaskForm = ({ onSubmit, editingTask, setEditingTask, editingDueDate, s
         const [hours, minutes] = time.split(':');
         const dueTime = new Date(editingDueDate);
         dueTime.setHours(hours, minutes);
-        onSubmit(editingTask, dueTime);
+        onSubmit(editingTask, dueTime, userId); // Pass userId to onSubmit
         setEditingTask('');
         setEditingDueDate('');
         setTime('');
@@ -110,7 +112,6 @@ const EditTaskForm = ({ onSubmit, editingTask, setEditingTask, editingDueDate, s
                     placeholder="Enter event description"
                 />
             </div>
-            {/* Removed Date input */}
             <div>
                 <label>Time</label>
                 <input
