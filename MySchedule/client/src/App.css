@@ -32,3 +32,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.MuiBox-root {
+  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  justify-content: center;
+
+}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../../src/components/ThemeContext';
-import { AddTaskForm, EditTaskForm } from '../../src/components/TaskForm';
-import TaskCalendar from '../../src/components/TaskCalendar';
+import { AddTaskForm, EditTaskForm } from '../../src/components/TaskForms';
+import TaskCalendar from '../../src/components/TaskCalendar/TaskCalendar';
 import { useLoginContext } from '../../src/components/LoginContext'; // Import useLoginContext
-import './TaskSchedulerPage.css';
+import Box from '@mui/material/Box'; 
 import axios from 'axios';
+
+import './TaskSchedulerPage.css';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Backend URL from environment variables
 
@@ -143,9 +145,9 @@ const TaskSchedulerPage = () => {
     };
 
     return (
-        <div className={`container ${mode}`}>
-            <div className="task-scheduler-box">
-                <h1>Weekly Task Scheduler</h1>
+        <Box className={`task-scheduler-container ${mode}`}>
+            <Box className="task-scheduler-box"> {/* NOTE FOR ME : the big box */} 
+                <h1>Task Scheduler</h1>
                 {isAddFormVisible && (
                     <AddTaskForm
                         onSubmit={handleAddTask}
@@ -160,6 +162,7 @@ const TaskSchedulerPage = () => {
                         editingDueDate={editingDueDate || selectedDate}
                         setEditingTask={setEditingTask}
                         setEditingDueDate={setEditingDueDate}
+                        onDelete={() => handleDeleteTask(editingIndex)}
                         onClose={() => setEditFormVisible(false)}
                     />
                 )}
@@ -171,8 +174,8 @@ const TaskSchedulerPage = () => {
                     onEventDrop={handleEventDrop} // Pass the event drop handler
                     mode={mode}
                 />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };
 

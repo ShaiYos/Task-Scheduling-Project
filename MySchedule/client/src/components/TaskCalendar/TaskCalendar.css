@@ -1,0 +1,166 @@
+
+
+/* This is the color of the days (whole table) */
+/* .fc-day.dark {
+    background-color: #444; 
+    color:black;
+} */
+
+
+/* This is the color of the days titles */
+.light .fc-col-header-cell-cushion {
+    color: black; 
+}
+
+.dark .fc-col-header-cell-cushion {
+    color: white;
+}
+
+
+/* This is the background color of the days titles */
+/* .dark .fc-col-header  {
+   background-color: #575bb1;
+} */
+
+
+ /* Day header */
+/* .fc-day-header {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+} */
+
+/* Day cells */
+.dark .fc-day {
+    background-color: #444;
+    border: 1px solid #e0e0e0;
+    /* padding: 20px; */
+}
+
+.light .fc-day {
+    background-color: #e0e0e0;
+    border: 1px solid #444; 
+}
+
+/* Day number */
+.dark .fc-daygrid-day-number {
+    color:white;
+}
+
+.light .fc-daygrid-day-number {
+    color:black;
+}
+
+
+.light .fc-view-harness.fc-view-harness-active {
+    border: 1px solid #444;
+}
+
+
+
+
+
+/* .dark .fc-view-harness.fc-view-harness-active {
+    border: 1px solid #ff0000;
+} */
+
+/* .light .fc-scrollgrid  .fc-scrollgrid-liquid {
+    border: 1px solid #ff0000;
+} */
+
+
+/* Tasks styles */
+.light .fc-event {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.light .fc-event:hover {
+    background-color: #005fc4;
+}
+
+.dark .fc-event {
+    background-color: #747bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.dark .fc-event:hover {
+    background-color: #575bb1;
+}
+
+
+/* event dot */
+.light .fc-daygrid-event-dot  {
+    border-radius: 50%;
+    border-color: #fff;
+    /* width: 10px; */
+    /* height: 10px; */
+}
+
+.dark .fc-daygrid-event-dot  {
+    border-radius: 50%;
+    border-color: #fff;
+    /* width: 10px; */
+    /* height: 10px; */
+}
+
+/* the month title */
+/* .dark .fc-toolbar-chunk {
+    color:#747bff
+} */
+
+.light .fc-toolbar-chunk {
+    color:#007bff
+}
+
+.dark .fc-toolbar-chunk {
+    color:#747bff
+}
+
+
+
+/* style the two groups of buttons */
+.light .fc-button-group .fc-button {
+    border: none; 
+    padding: 10px 10px; 
+    background-color: #007bff;
+}
+  
+.light .fc-button-group .fc-button:hover {
+    background-color: #007bffa1; /* Change background color on hover */
+}
+
+.dark .fc-button-group .fc-button {
+    border: none; 
+    padding: 10px 10px; 
+    background-color: #747bff;
+}
+
+.dark .fc-button-group .fc-button:hover {
+    background-color: #747bffa1; /* Change background color on hover */
+}
+
+/* today button */
+.light .fc-today-button.fc-button.fc-button-primary{
+    border-color: #333; 
+    background-color: #007bff;
+}
+
+.dark .fc-today-button.fc-button.fc-button-primary{
+    border-color: #e0e0e0; 
+    background-color: #747bff;
+}
+
+
+/* today shell */
+/* .light .fc-dayGridMonth-view.fc-view.fc-daygrid {
+    background-color: #007bffa1; 
+} */
+
+/* .dark .fc-dayGridMonth-view.fc-view.fc-daygrid {
+    background-color: #747bffa0; 
+} */

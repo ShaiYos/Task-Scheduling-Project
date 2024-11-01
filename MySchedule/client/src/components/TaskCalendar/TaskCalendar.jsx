@@ -3,14 +3,16 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { useLoginContext } from './LoginContext'; // Import useLoginContext
+import { useLoginContext } from '../LoginContext'; // Import useLoginContext
+import Box from '@mui/material/Box'; // Import Box from Material-UI
+
+import './TaskCalendar.css';
 
 const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDoubleClick, mode, onEventDrop }) => {
     const calendarRef = useRef(null);
     const { userId } = useLoginContext(); // Get userId from context
 
     return (
-        <div className={`calendar-container ${mode}`}>
             <FullCalendar
                 ref={calendarRef}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -20,6 +22,7 @@ const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDou
                 eventClick={handleEventClick}
                 eventDrop={onEventDrop} // Add the eventDrop handler here
                 eventDoubleClick={handleEventDoubleClick}
+                timeZone= 'Asia/Jerusalem'
                 events={tasks
                     .filter(task => task.userId === userId) // Filter tasks by userId
                     .map(task => ({
@@ -44,7 +47,6 @@ const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDou
                 height={'600px'}
                 className={mode}
             />
-        </div>
     );
 };
 
