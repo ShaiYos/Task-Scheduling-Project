@@ -24,7 +24,7 @@ function ThemeToggleButton() {
   return (
     <IconButton
       onClick={toggleTheme}
-      sx={{ position: 'absolute', top: 10, right: 10 }}
+      sx={{ position: 'fixed', top: 10, right: 10 }}
     >   {/* Icon changes based on the current theme (light or dark) */}
       {mode === 'light' ? <NightlightIcon /> : <WbSunnyIcon />}
     </IconButton>
