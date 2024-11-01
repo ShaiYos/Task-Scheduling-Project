@@ -51,11 +51,14 @@ export default function LoginPage() {
             if (axios.isAxiosError(error)) {
                 // Check if the error response indicates an authentication failure
                 if (error.response?.status === 401) {
-                    alert(error.response.data.message || "Invalid username or password");
+                    setError('Invalid username or password');
                 } else {
-                    alert("An unexpected error occurred.");
+                    setError('An error occurred. Please try again later.');
                 }
+            } else {
+                setError('An error occurred. Please try again later.');
             }
+            console.error('Login error:', error);
         }
     };
 

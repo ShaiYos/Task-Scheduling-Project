@@ -28,31 +28,38 @@ export const createUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  console.log("login request received:", req.body);
-  try {
-      const { username, password } = req.body;
+    console.log("Login request received:", req.body);
+    
+    try {
+        const { username, password } = req.body;
 
-      // Fetch the user by username
-      const user = await getUserByUsernameService(username);
+        // Check if username and password are provided
+        if (!username || !password) {
+            return serverResponse(res, 400, "Username and password are required");
+        }
 
-      if (!user) {
-          // User not found
-          return serverResponse(res, 401, "Invalid username or password");
-      }
+        // Fetch the user by username
+        const user = await getUserByUsernameService(username);
 
-      // Compare passwords
-      const isValidPassword = comparePasswords(password, user.password);
+        if (!user) {
+            // User not found
+            return serverResponse(res, 401, "Invalid username or password");
+        }
 
-      if (!isValidPassword) {
-          // Password is incorrect
-          return serverResponse(res, 401, "Invalid username or password");
-      }
+        // Compare passwords
+        const isValidPassword = comparePasswords(password, user.password);
 
-      // If authentication is successful, respond with user data (avoid sending password)
-      return serverResponse(res, 200, { message: "Login successful", userId: user._id });
-  } catch (error) {
-      console.error("Error in loginUser:", error);
-      return serverResponse(res, 500, error.message);
-  }
+        if (!isValidPassword) {
+            // Password is incorrect
+            return serverResponse(res, 401, "Invalid username or password");
+        }
+
+        // If authentication is successful, respond with user data (avoid sending password)
+        return serverResponse(res, 200, { message: "Login successful", userId: user._id });
+    } catch (error) {
+        console.error("Error in loginUser:", error);
+        return serverResponse(res, 500, error.message);
+    }
 };
+
 

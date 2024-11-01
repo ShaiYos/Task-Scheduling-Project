@@ -10,6 +10,7 @@ export const createUserService = async (user) => UserModel.create(user);
 
 // service to check if the username is unique
 export const getUserByUsernameService = async (username) => {
+  console.log("Username to fetch:", username);
   try {
     if (!username) {
       throw new Error('Username is required');
