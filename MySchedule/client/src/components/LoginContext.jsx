@@ -12,7 +12,7 @@ export const LoginProvider = ({ children }) => {
     useEffect(() => {
         const userLoggedIn = localStorage.getItem('loggedIn') === 'true';
         const storedUserId = localStorage.getItem('userId');
-        setLoggedIn(userLoggedIn);
+        setLoggedIn(userLoggedIn);  
         setUserId(storedUserId);
     }, []);
 
