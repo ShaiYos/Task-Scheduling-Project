@@ -3,10 +3,12 @@ import cors from 'cors'; // Import CORS middleware to enable cross-origin resour
 import mongoose from 'mongoose';
 import UserRoutes from './routes/UserRoutes.js'; 
 import taskRoutes from './routes/TaskRoutes.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const dbURI = process.env.MONGODB_URI;
 
-const port = 3000; // Define the port on which the server will listen
+const port = process.env.PORT || 3000; // Define the port on which the server will listen
 const app = express();
 
 app.use(cors()); // Enable CORS for all routes and origins
@@ -18,8 +20,8 @@ mongoose.connect(dbURI)
     .catch((error) => console.log('Error connecting to MongoDB:', error));
 
 // Define routes for the app using the imported UserRoutes
-app.use('/', UserRoutes);
-app.use('/', taskRoutes); 
+app.use('/api/user', UserRoutes);
+app.use('/api/task', taskRoutes); 
 
 // Start the server and have it listen on the specified port
 app.listen(port, () => {

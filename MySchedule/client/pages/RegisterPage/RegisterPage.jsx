@@ -37,7 +37,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const response = await axios.post(`${BACKEND_URL}/register`, {
+            const response = await axios.post(`${BACKEND_URL}/api/user/register`, {
                 username: username.toLowerCase(),
                 email,
                 password,

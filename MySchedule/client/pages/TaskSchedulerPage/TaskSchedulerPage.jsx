@@ -32,7 +32,7 @@ const TaskSchedulerPage = () => {
         const fetchTasks = async () => {
             if (userId) {
                 try {
-                    const response = await axios.get(`${BACKEND_URL}/task-scheduler`, {
+                    const response = await axios.get(`${BACKEND_URL}/api/task/task-scheduler`, {
                         params: { userId } // Pass userId as query parameter
                     });
                     const fetchedTasks = response.data.map(task => ({
@@ -53,7 +53,7 @@ const TaskSchedulerPage = () => {
     const handleAddTask = async (description, dueDate) => {
         const task = { description, dueDate: new Date(dueDate), finished: false, userId };
         try {
-            const response = await axios.post(`${BACKEND_URL}/task-scheduler`, task);
+            const response = await axios.post(`${BACKEND_URL}/api/task/task-scheduler`, task);
             const newTask = response.data;
             const updatedTasks = [...tasks, newTask];
             setTasks(updatedTasks);
@@ -68,7 +68,7 @@ const TaskSchedulerPage = () => {
             const taskToUpdate = tasks[editingIndex];
             const updatedTask = { ...taskToUpdate, description, dueDate: new Date(dueDate), userId };
             try {
-                const response = await axios.put(`${BACKEND_URL}/task-scheduler/${taskToUpdate._id}`, updatedTask);
+                const response = await axios.put(`${BACKEND_URL}/api/task/task-scheduler/${taskToUpdate._id}`, updatedTask);
                 const updatedTasks = tasks.map((task, index) =>
                     index === editingIndex ? response.data : task
                 );
@@ -86,7 +86,7 @@ const TaskSchedulerPage = () => {
     const handleDeleteTask = async (index) => {
         const taskToDelete = tasks[index];
         try {
-            await axios.delete(`${BACKEND_URL}/task-scheduler/${taskToDelete._id}`);
+            await axios.delete(`${BACKEND_URL}/api/task/task-scheduler/${taskToDelete._id}`);
             const updatedTasks = tasks.filter((task, i) => i !== index);
             setTasks(updatedTasks);
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));  // Save to localStorage

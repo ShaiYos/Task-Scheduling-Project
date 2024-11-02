@@ -37,7 +37,7 @@ export default function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior (page reload)
         try {
-            const response = await axios.post(`${BACKEND_URL}/login`, {
+            const response = await axios.post(`${BACKEND_URL}/api/user/login`, {
                 username: username.toLowerCase(), // Lowercase username for consistency,
                 password,
             });
