@@ -45,6 +45,7 @@ export default function LoginPage() {
             if (response.status === 200) {
                 console.log("Login successful", response.data);
                 loginUser(response.data.userId); // Call loginUser from context to update the state with user ID
+                localStorage.setItem('username', username);
                 navigate('/home');
             }
         } catch (error) {

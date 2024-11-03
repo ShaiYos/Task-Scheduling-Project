@@ -1,12 +1,18 @@
 // HomePage.js
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
 import { useThemeContext } from '../../src/components/ThemeContext';
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const { mode } = useThemeContext(); // Get the mode from the context
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   return (
     <Box
@@ -15,14 +21,13 @@ const HomePage = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        // height: '100%',
-        bgcolor: mode === 'dark' ? '#333' : '#f5f5f5',
+        bgcolor: mode === 'dark' ? '#444' : '#eaeaea',
         color: mode === 'dark' ? '#ffffff' : '#000000',
         padding: 20,
       }}
     >
       <Typography variant="h2" gutterBottom>
-        Welcome to Your Task Management App!
+        Welcome{username ? `, ${username}` : ''}!
       </Typography>
       <Typography variant="h4" gutterBottom>
         Manage your tasks efficiently and effectively.
