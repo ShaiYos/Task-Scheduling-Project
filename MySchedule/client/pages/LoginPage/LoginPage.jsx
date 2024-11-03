@@ -45,7 +45,7 @@ export default function LoginPage() {
             if (response.status === 200) {
                 console.log("Login successful", response.data);
                 loginUser(response.data.userId); // Call loginUser from context to update the state with user ID
-                navigate('/task-scheduler');
+                navigate('/home');
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
