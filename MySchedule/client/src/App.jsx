@@ -1,55 +1,57 @@
-
-// Main application component
+import React, { useState } from 'react';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import TaskSchedulerPage from '../pages/TaskSchedulerPage/TaskSchedulerPage';
-import { ThemeContextProvider, useThemeContext } from './components/ThemeContext';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NightlightIcon from '@mui/icons-material/Nightlight';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import IconButton from '@mui/material/IconButton';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import ModeToggle from './components/ModeToggle';
 import Box from '@mui/material/Box';
-import AuthWrapper from './components/AuthWrapper/AuthWrapper.jsx';
-import LogoutButton from './components/LogoutButton.jsx';
-import { LoginProvider } from './components/LoginContext.jsx'; // Use curly braces for named import
-
+import { useLoginContext } from './components/LoginContext.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import HomePage from '../pages/HomePage.jsx';
 
 import './App.css';
 
-// Component for theme toggle button (Light/Dark mode)
-function ThemeToggleButton() {
-  const { mode, toggleTheme } = useThemeContext(); // Access theme mode and toggle function
+const App = () => {
+  const { loggedIn } = useLoginContext(); // Check if user is logged in
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // State for sidebar visibility
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev); // Toggle the sidebar
+  };
 
   return (
-    <IconButton
-      onClick={toggleTheme}
-      sx={{ position: 'fixed', top: 10, right: 10 }}
-    >   {/* Icon changes based on the current theme (light or dark) */}
-      {mode === 'light' ? <NightlightIcon /> : <WbSunnyIcon />}
-    </IconButton>
-  );
-}
-
-
-function App() {
-  return (
-    <ThemeContextProvider>
-      <LoginProvider> {/* Wrap the app with LoginContext */}
-        <ThemeToggleButton />
-        <Box id="root" sx={{ position: 'relative' }}>
-          <BrowserRouter>
-            <LogoutButton />
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/task-scheduler" element={<AuthWrapper><TaskSchedulerPage /></AuthWrapper>} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-            </Routes>
-          </BrowserRouter>
+    <>
+      <ModeToggle />
+      <Box id="root" sx={{ 
+        position: 'relative', display: 'flex', minHeight: '100vh' }}>
+        {loggedIn && (
+          <>
+            {/* Sidebar Component */}
+            <Sidebar 
+              open={isSidebarOpen} 
+              onClose={() => setSidebarOpen(false)} 
+              toggleSidebar={toggleSidebar} 
+            />
+          </>
+        )}
+        
+        {/* Main Content */}
+        <Box sx={{ flexGrow: 1, p: 3, ml: loggedIn ? (isSidebarOpen ? 30 : 0) : 0 }}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/task-scheduler"
+              element={loggedIn ? <TaskSchedulerPage /> : <Navigate to="/login" />}
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
         </Box>
-      </LoginProvider>
-    </ThemeContextProvider>
+      </Box>
+    </>
   );
-}
+};
+
 export default App;

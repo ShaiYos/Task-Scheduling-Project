@@ -5,6 +5,7 @@ import TaskCalendar from '../../src/components/TaskCalendar/TaskCalendar';
 import { useLoginContext } from '../../src/components/LoginContext'; // Import useLoginContext
 import Box from '@mui/material/Box'; 
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 import './TaskSchedulerPage.css';
 
@@ -12,7 +13,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Backend URL from enviro
 
 const TaskSchedulerPage = () => {
     const { mode } = useThemeContext();
-    const { userId } = useLoginContext(); // Get userId from context
+    const { userId, loggedIn } = useLoginContext(); // Get userId and loggedIn from context
     const [tasks, setTasks] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
     const [editingTask, setEditingTask] = useState('');
@@ -20,6 +21,13 @@ const TaskSchedulerPage = () => {
     const [isAddFormVisible, setAddFormVisible] = useState(false);
     const [isEditFormVisible, setEditFormVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
+    const navigate = useNavigate(); // Hook to navigate to another route
+
+    useEffect(() => {
+        if (!loggedIn) {
+            navigate('/'); // Navigate to the landing page if not logged in
+        }
+    }, [loggedIn, navigate]);
 
     useEffect(() => {
         // Load tasks from localStorage if available

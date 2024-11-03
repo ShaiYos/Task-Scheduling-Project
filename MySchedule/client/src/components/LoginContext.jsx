@@ -1,41 +1,40 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create the Login Context
 const LoginContext = createContext();
 
-// Login Provider Component
-export const LoginProvider = ({ children }) => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [userId, setUserId] = useState(null); // State to store user ID
+export const useLoginContext = () => useContext(LoginContext);
 
-    // Check local storage for logged-in state and user ID
-    useEffect(() => {
-        const userLoggedIn = localStorage.getItem('loggedIn') === 'true';
-        const storedUserId = localStorage.getItem('userId');
-        setLoggedIn(userLoggedIn);  
-        setUserId(storedUserId);
-    }, []);
+export const LoginProvider = ({ children }) => {
+    const [userId, setUserId] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true'); // Initialize from localStorage
 
     const loginUser = (id) => {
-        setLoggedIn(true);
         setUserId(id);
-        localStorage.setItem('loggedIn', 'true'); // Store logged-in state
-        localStorage.setItem('userId', id); // Store user ID
+        setLoggedIn(true);
+        localStorage.setItem('loggedIn', true);
+        localStorage.setItem('userId', id);
     };
 
     const logoutUser = () => {
-        setLoggedIn(false);
-        setUserId(null);
-        localStorage.setItem('loggedIn', 'false'); // Clear logged-in state
-        localStorage.removeItem('userId'); // Remove user ID
+        setUserId(null); // Clear userId
+        setLoggedIn(false); // Update loggedIn to false
+        localStorage.setItem('loggedIn', false);
+        localStorage.removeItem('userId'); // Clear userId from localStorage
     };
 
+    useEffect(() => {
+        // Check local storage for loggedIn state
+        const storedLoggedInState = localStorage.getItem('loggedIn');
+        const storedUserId = localStorage.getItem('userId'); // Retrieve userId from localStorage
+        if (storedLoggedInState === 'true' && storedUserId) {
+            setLoggedIn(true); // Update loggedIn state from local storage
+            setUserId(storedUserId); // Set userId from local storage
+        }
+    }, []);
+    
     return (
-        <LoginContext.Provider value={{ loggedIn, userId, loginUser, logoutUser }}>
+        <LoginContext.Provider value={{ userId, loggedIn, loginUser, logoutUser }}>
             {children}
         </LoginContext.Provider>
     );
 };
-
-// Custom hook to use Login Context
-export const useLoginContext = () => useContext(LoginContext);
