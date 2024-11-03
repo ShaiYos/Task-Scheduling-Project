@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useThemeContext } from '../src/components/ThemeContext';
+import { useThemeContext } from '../../src/components/ThemeContext';
 
 const HomePage = () => {
   const navigate = useNavigate();

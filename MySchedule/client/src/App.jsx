@@ -8,8 +8,9 @@ import ModeToggle from './components/ModeToggle';
 import Box from '@mui/material/Box';
 import { useLoginContext } from './components/LoginContext.jsx';
 import Sidebar from './components/Sidebar.jsx';
-import HomePage from '../pages/HomePage.jsx';
-
+import HomePage from '../pages/HomePage/HomePage';
+import MotivationQuotesPage from '../pages/MotivationalQuotesPage/MotivationalQuotesPage';
+ 
 import './App.css';
 
 const App = () => {
@@ -40,13 +41,14 @@ const App = () => {
         <Box sx={{ flexGrow: 1, p: 3, ml: loggedIn ? (isSidebarOpen ? 30 : 0) : 0 }}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route
               path="/task-scheduler"
               element={loggedIn ? <TaskSchedulerPage /> : <Navigate to="/login" />}
             />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/motivation" element={<MotivationQuotesPage />} />
           </Routes>
         </Box>
       </Box>

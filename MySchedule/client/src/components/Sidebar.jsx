@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React from 'react';
 import { Drawer, Box, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,30 +8,30 @@ import { useThemeContext } from './ThemeContext';
 
 const Sidebar = ({ open, onClose, toggleSidebar }) => {
   const navigate = useNavigate();
-  const { logoutUser, loggedIn } = useLoginContext();
+  const { logoutUser } = useLoginContext(); // Removed loggedIn since it's not used
   const { mode } = useThemeContext();
 
-    const handleNavigation = (path) => {
-        if (path === '/logout') {
-            logoutUser(); // Call logoutUser to update the state
-            console.log("Logged out. Local storage userId:", localStorage.getItem('loggedIn')); // Check value
-            setIsVisible(false); // Hide the sidebar immediately
-            navigate('/'); // Navigate to the landing page
-        } else {
-            navigate(path); // Navigate to the specified path
-            onClose(); // Close the sidebar after navigation
-        }
-    };
+  const handleNavigation = (path) => {
+    if (path === '/logout') {
+      logoutUser(); // Call logoutUser to update the state
+      console.log("Logged out. Local storage userId:", localStorage.getItem('loggedIn')); // Check value
+      onClose(); // Close the sidebar
+      navigate('/'); // Navigate to the landing page
+    } else {
+      navigate(path); // Navigate to the specified path
+      onClose(); // Close the sidebar after navigation
+    }
+  };
 
   return (
     <>
       <IconButton
         onClick={toggleSidebar}
-        sx={{ 
+        sx={{
           position: 'fixed',
           top: '10px',
           left: '10px',
-          color: mode === 'light'? 'black' : 'white' ,
+          color: mode === 'light' ? 'black' : 'white',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
@@ -55,11 +55,11 @@ const Sidebar = ({ open, onClose, toggleSidebar }) => {
             {[ // List of navigation items
               { text: 'Home', path: '/home' },
               { text: 'Task Scheduler', path: '/task-scheduler' },
-              { text: 'Profile', path: '/profile' },
-              { text: 'Settings', path: '/settings' },
+              // { text: 'Profile', path: '/profile' },
+              { text: 'Motivational Quotes', path: '/motivation' },
               { text: 'Logout', path: '/logout' }
             ].map(({ text, path }) => (
-              <ListItem button="true" key={text} onClick={() => handleNavigation(path)}>
+              <ListItem button='true' key={text} onClick={() => handleNavigation(path)}>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
