@@ -1,21 +1,51 @@
-/* MotivationQuotesPage.css */
 
-/* Common styles */
 .motivation-page-container {
-    /* padding: 2px; */
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Light mode styles */
-  .light {
-    background-color: #ffffff; /* Light background */
-    color: #000000; /* Dark text */
-  }
-  
-  /* Dark mode styles */
-  .dark {
-    background-color: #333; /* Dark background */
-    color: #ffffff; /* Light text */
-  }
-  
+  padding: 4rem;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.motivation-page-container h4 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+ .motivation-page-container.dark h4 {
+    color: #fff;
+}
+
+
+.motivation-page-container .quote-text {
+  font-size: 1.75rem;
+  font-style: italic;
+  color: #555;
+  margin: 1rem 0;
+}
+
+.motivation-page-container.dark .quote-text {
+  color: #ddd;
+} 
+
+.motivation-page-container .quote-author {
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+.motivation-page-container.dark .quote-author {
+  color: #aaa;
+}
+
+
+.motivation-page-container .fetch-quote-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
