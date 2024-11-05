@@ -12,14 +12,21 @@ export const createUserService = async (user) => UserModel.create(user);
 export const getUserByUsernameService = async (username) => {
   console.log("Username to fetch:", username);
   try {
-    if (!username) {
-      throw new Error('Username is required');
-    }
-    
-    const user = await UserModel.findOne({ username });
-    return user;
+      if (!username) {
+          throw new Error('Username is required');
+      }
+      
+      const user = await UserModel.findOne({ username });
+      
+      if (!user) {
+          console.log("User not found for username:", username);
+          return null; // Handle as appropriate
+      }
+
+      console.log("User found:", user); // Log found user
+      return user;
   } catch (error) {
-    console.error("Error finding user by username:", error);
-    throw new Error('Could not fetch user');
+      console.error("Error finding user by username:", error);
+      throw new Error('Could not fetch user');
   }
 };

@@ -5,27 +5,36 @@ import { comparePasswords } from "../utils/comparePaswwords.js";
 
 
 export const createUser = async (req, res) => {
-  console.log("Registration request received:", req.body);
-  try {
-      const { username, email, password } = req.body;
+    console.log("Registration request received:", req.body); // Check the request body
+    try {
+        const { username, email, password, gender, dateOfBirth, image } = req.body;
 
-      // Check if user already exists
-      const existingUser = await getUserByUsernameService(username);
-      if (existingUser) {
-          return res.status(409).json({ error: 'User already exists' });
-      }
+        // Check if user already exists
+        const existingUser = await getUserByUsernameService(username);
+        if (existingUser) {
+            return res.status(409).json({ error: 'User already exists' });
+        }
 
-      // If not exist, create new user
-      const hashedPassword = await hashPassword(password);
-      const newUser = await createUserService({ username, email, password: hashedPassword });
+        // If not exist, create new user
+        const hashedPassword = await hashPassword(password);
+        const newUser = await createUserService({
+            username,
+            email,
+            password: hashedPassword,
+            gender,
+            dateOfBirth,
+            image
+        });
+        console.log('New user created:', newUser);
 
-      // Respond with the newly created user
-      res.status(201).json(newUser);
-  } catch (error) {
-      console.error('Error creating user:', error);
-      res.status(500).json({ error: 'Server error' });
-  }
+        // Respond with the newly created user
+        res.status(201).json(newUser);
+    } catch (error) {
+        console.error('Error creating user:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
 };
+
 
 export const loginUser = async (req, res) => {
     console.log("Login request received:", req.body);
