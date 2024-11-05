@@ -4,9 +4,9 @@
   padding: 2rem;
   text-align: center;
   font-family: 'roboto', sans-serif;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 @keyframes logo-spin {

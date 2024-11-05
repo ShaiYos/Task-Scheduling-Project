@@ -25,7 +25,7 @@ const App = () => {
     <>
       <ModeToggle />
       <Box id="root" sx={{ 
-        position: 'relative', display: 'flex', minHeight: '100vh' }}>
+        position: 'relative', display: 'flex'}}>
         {loggedIn && (
           <>
             {/* Sidebar Component */}
