@@ -54,8 +54,8 @@ const Sidebar = ({ open, onClose, toggleSidebar }) => {
           <List>
             {[ // List of navigation items
               { text: 'Home', path: '/home' },
+              { text: 'Profile', path: '/profile' },
               { text: 'Task Scheduler', path: '/task-scheduler' },
-              // { text: 'Profile', path: '/profile' },
               { text: 'Motivational Quotes', path: '/motivation' },
               { text: 'Logout', path: '/logout' }
             ].map(({ text, path }) => (

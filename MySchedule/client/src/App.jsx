@@ -10,8 +10,10 @@ import { useLoginContext } from './components/LoginContext.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import HomePage from '../pages/HomePage/HomePage';
 import MotivationQuotesPage from '../pages/MotivationalQuotesPage/MotivationalQuotesPage';
+import ProfilePage from '../pages/ProfilePage/ProfilePage.jsx';
  
 import './App.css';
+
 
 const App = () => {
   const { loggedIn } = useLoginContext(); // Check if user is logged in
@@ -48,6 +50,7 @@ const App = () => {
               path="/task-scheduler"
               element={loggedIn ? <TaskSchedulerPage /> : <Navigate to="/login" />}
             />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/motivation" element={<MotivationQuotesPage />} />
           </Routes>
         </Box>
