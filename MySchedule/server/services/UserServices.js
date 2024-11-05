@@ -30,3 +30,7 @@ export const getUserByUsernameService = async (username) => {
       throw new Error('Could not fetch user');
   }
 };
+
+export const getUserDetailsService = async (userId) => {
+    return await UserModel.findById(userId).select('-password'); // Return the result
+};

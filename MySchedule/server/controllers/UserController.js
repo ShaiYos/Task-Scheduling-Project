@@ -1,7 +1,8 @@
 import { hashPassword } from "../utils/hashPassword.js";
-import { createUserService, getUserByUsernameService } from "../services/UserServices.js";
+import { createUserService, getUserByUsernameService , getUserDetailsService } from "../services/UserServices.js";
 import { serverResponse } from "../utils/serverResponse.js";
 import { comparePasswords } from "../utils/comparePaswwords.js";
+
 
 
 export const createUser = async (req, res) => {
@@ -71,4 +72,15 @@ export const loginUser = async (req, res) => {
     }
 };
 
-
+export const getUserProfile = async (req, res) => {
+    try {
+        const user = await getUserDetailsService(req.params.id); // Await the service call
+        console.log("User found:", user); // Log the user found
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+}
