@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LoginProvider>
       <ThemeContextProvider>
-        <LocalizationProvider dateAdapter={AdapterDayjs}> {/* Wrap your app here */}
+        <LocalizationProvider dateAdapter={AdapterDayjs}> 
           <BrowserRouter>
             <App />
           </BrowserRouter>

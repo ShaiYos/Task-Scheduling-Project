@@ -1,94 +1,91 @@
-/* Ensure the main container is centered and styled */
+/* LandingPage.css */
 
-.LandingPageContainer {
-    padding: 70px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.LandingPageContainer.light {
+    background-color: #eaeaea;
+    padding: 3rem 3rem;
     text-align: center;
+    margin: 0 auto;
+    border-radius: 15px;
+    /* border: 1px solid #808080; */
+
 }
 
-.title {
-    font-size: 2.5em;
+ .LandingPageContainer.dark {
+    background-color: #333;
+    color: #fff;
+    border-radius: 15px;
+    /* border: 1px solid #aaa; */
+    padding: 3rem 3rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.title.light {
+    font-size: 2.5rem;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
-.description {
-    font-size: 1.2em;
+.title.dark {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.description.light {
+    font-size: 1.25rem;
     color: #666;
-    margin-bottom: 30px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.description.dark {
+    font-size: 1.25rem;
+    color: #ccc;
+    margin-bottom: 2rem;
 }
 
 .features {
-    font-size: 1.1em;
-    color: #444;
-    margin-bottom: 30px;
+    margin-top: 2rem;
 }
 
-.features ul {
-    list-style-type: none;
-    padding: 0;
+.light .features .MuiPaper-root {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    margin: 1rem 0;
 }
 
-.features li {
-    margin: 10px 0;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: #0056b3;
-    color: #fff;
-}
-
-/* Dark Mode Styles */
-.dark {
+.dark .features .MuiPaper-root  {
     background-color: #333;
-    color: #fff;
-
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+    padding: 2rem;
+    margin: 1rem 0;
 }
 
-
-
-/* .dark .LandingPagecontainer {
-    background-color: #818181;
-} */
-
-.dark .title {
-    color: #fff;
+.light .features .MuiTypography-h5 {
+    font-size: 1.5rem;
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.dark .description {
-    color: #ccc;
+.dark .features .MuiTypography-h5 {
+    font-size: 1.5rem;
+    color: lightblue;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.dark .features {
-    color: #ddd;
+.light .features .MuiBox-root {
+    font-size: 3rem;
 }
 
-.dark .button {
-    background-color: #747bff;
-}
-
-.dark .button:hover {
-    background-color: #575bb1;
-    color: #fff;
+.buttons .MuiButton-root {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    margin: 0.5rem;
 }
