@@ -20,6 +20,8 @@ export const LoginProvider = ({ children }) => {
         setLoggedIn(false); // Update loggedIn to false
         localStorage.setItem('loggedIn', 'false');
         localStorage.removeItem('userId'); // Clear userId from localStorage
+        localStorage.removeItem('tasks'); // Clear userId from localStorage
+        localStorage.removeItem('username'); // Clear userId from localStorage
     };
 
     useEffect(() => {

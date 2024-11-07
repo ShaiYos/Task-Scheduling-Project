@@ -28,17 +28,12 @@ const App = () => {
       <ModeToggle />
       <Box id="root" sx={{ 
         position: 'relative', display: 'flex'}}>
-        {loggedIn && (
-          <>
             {/* Sidebar Component */}
             <Sidebar 
               open={isSidebarOpen} 
               onClose={() => setSidebarOpen(false)} 
               toggleSidebar={toggleSidebar} 
             />
-          </>
-        )}
-        
         {/* Main Content */}
         <Box sx={{ flexGrow: 1, p: 3, ml: loggedIn ? (isSidebarOpen ? 30 : 0) : 0 }}>
           <Routes>
