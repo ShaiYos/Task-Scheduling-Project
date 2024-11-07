@@ -1,68 +1,143 @@
 /* RegisterPage.css */
 
-.light {
-    background-color: #d4d4d4;
-    color: black;
-}
-
-.dark {
-    background-color: #333;
-    color: white;
-}
-
-/* Specific styles for inputs */
-.light .MuiInputBase-root {
+/* register page container styles */
+.register-page-container.light {
     background-color: #eaeaea;
-    color: black;
 }
 
-.dark .MuiInputBase-root {
-    background-color: #444;
-    color: white;
+.register-page-container.dark {
+    background-color: #333;
+    color: #fff;
 }
 
-/* Specific styles for input labels and icons */
-.light .MuiInputLabel-root,
-.light .MuiSvgIcon-root {
-    color: rgb(46, 46, 46);
+/* register title styles */
+.register-page-container .sign-up-title {
+    font-weight: bold;
+    margin-bottom: 2rem;
 }
 
-.dark .MuiInputLabel-root,
-.dark .MuiSvgIcon-root {
-    color: white;
-}
-
-/* Center the Box component */
-.register-form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    min-width: 800px; /* This will be the width on small screens */
-    width: 100%; /* Allow the box to take full width of its parent */
-}
-
-/* Media query for wider screens */
-@media (max-width: 768px) {
-    .register-form-container {
-        min-width: 500px; /* Set a wider minimum width for larger screens */
-    }
-}
-
-
- /* .registerButton {
+/* Button login styles in light mode */
+.light .signUpBtn {
     background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
-    text-decoration: none;
     transition: background-color 0.3s;
-} */
+    /* margin-top: 0.5rem; */
+}
+
+.light .signUpBtn:hover {
+    background-color: #005fc4;
+    cursor: pointer;
+}
+
+/* Button login styles in dark mode */
+.dark .signUpBtn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    /* margin-top: 0.5rem; */
+    /* margin-bottom: 2rem; */
+}
+
+/* Link styles in light mode */
+.light .login-link {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-left: 0.3rem;
+}
+
+.light .login-link:hover {
+    color: #005fc4;
+    text-decoration: underline;
+}
+
+/* Link styles in dark mode */
+.dark .login-link {
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-left: 0.3rem;
+}
+
+.dark .login-link:hover {
+    color: #137edb;
+    text-decoration: underline;
+}
+
+/* Light mode autofill styles for custom textfield */
+.light .custom-textfield input:-webkit-autofill {
+    background-color: #faf8f8 !important; 
+    -webkit-box-shadow: 0 0 0 1000px #faf8f8 inset !important; 
+    -webkit-text-fill-color: black !important;
+    border-radius: 0 !important; 
+}
+
+/* Dark mode autofill styles for custom textfield */
+.dark .custom-textfield input:-webkit-autofill {
+    background-color: #555 !important; 
+    -webkit-box-shadow: 0 0 0 1000px #555 inset !important; 
+    -webkit-text-fill-color: white !important;
+    border-radius: 0 !important;
+}
+
+/* bg color of the textfield in light mode */
+.light .custom-textfield .MuiOutlinedInput-root  {
+    background-color: #faf8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-size: 1.2rem; 
+    padding: 12px 14px; 
+    height: 60px; 
+}
+
+/* bg color of the textfield in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root  {
+    background-color: #555;   
+    box-shadow: 0 4px 8px rgba(213, 213, 213, 0.1);
+    font-size: 1.2rem; 
+    padding: 12px 14px; 
+    height: 60px; 
+}
+
+/* Change border color on hover in light mode */
+.light .custom-textfield .MuiOutlinedInput-root:hover fieldset {
+    border-color: #0073e6;  
+}
+
+/* Change border color on hover in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root:hover fieldset {
+    border-color: lightblue;  
+}
+
+/* Change border color when focused in light mode */
+.light .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: #0073e6;  
+}
+
+/* Change border color when focused in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: lightblue; 
+}
+
+/* Change text color in light mode */
+.light .custom-textfield input {
+    color: #000;  
+}
+
+/* Change text color in light mode */
+.dark .custom-textfield input {
+    color: #fff;  
+}
+
+
+
+
+
+
+
+
 
 
 

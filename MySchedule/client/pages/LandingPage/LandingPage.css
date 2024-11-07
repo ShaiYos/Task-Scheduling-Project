@@ -10,7 +10,7 @@
 
 }
 
- .LandingPageContainer.dark {
+.LandingPageContainer.dark {
     background-color: #333;
     color: #fff;
     border-radius: 15px;
@@ -20,27 +20,27 @@
     margin: 0 auto;
 }
 
-.title.light {
+.light .title {
     font-size: 2.5rem;
     font-weight: bold;
     color: #333;
     margin-bottom: 1rem;
 }
 
-.title.dark {
+.dark .title {
     font-size: 2.5rem;
     font-weight: bold;
     color: #fff;
     margin-bottom: 1rem;
 }
 
-.description.light {
+.light .description {
     font-size: 1.25rem;
     color: #666;
     margin-bottom: 2rem;
 }
 
-.description.dark {
+.dark .description {
     font-size: 1.25rem;
     color: #ccc;
     margin-bottom: 2rem;
@@ -51,7 +51,7 @@
 }
 
 .light .features .MuiPaper-root {
-    background-color: #fff;
+    background-color: #f6f6f6;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     padding: 2rem;
@@ -89,3 +89,26 @@
     padding: 0.75rem 1.5rem;
     margin: 0.5rem;
 }
+
+ .light .buttons .MuiButton-contained {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+} 
+
+.light .buttons .MuiButton-contained:hover {
+    background-color: #0056b3;
+}
+
+.light .buttons .MuiButton-outlined {
+    border-color: #007bff;
+    color: #007bff;
+    border-radius: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.light .buttons .MuiButton-outlined:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+} 
+

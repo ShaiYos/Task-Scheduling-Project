@@ -1,144 +1,130 @@
-/* RegisterPage.css */
+/* LoginPage.css */
 
-.light {
+/* login page container styles */
+.login-page-container.light {
     background-color: #eaeaea;
-    color: black;
 }
-
-.dark {
+.login-page-container.dark {
     background-color: #333;
-    color: white;
+    color: #fff;
 }
 
-/* Specific styles for inputs */
-.light .MuiInputBase-root {
-    background-color: #eaeaea;
-    color: black;
+/* login title styles */
+.login-page-container .login-title {
+    font-weight: bold;
+    margin-bottom: 2rem;
 }
 
-.dark .MuiInputBase-root {
-    background-color: #444;
-    color: white;
-}
-
-/* Specific styles for input labels and icons */
-.light .MuiInputLabel-root,
-.light .MuiSvgIcon-root {
-    color: black;
-}
-
-.dark .MuiInputLabel-root,
-.dark .MuiSvgIcon-root {
-    color: white;
-}
-
-
-
-/* autofill styles */
-.light input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #eaeaea inset !important;
-    -webkit-text-fill-color: black !important;
-    caret-color: black !important;
-}
-
-
-
-.dark input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #444 inset !important;
-    -webkit-text-fill-color: white !important;
-    caret-color: white !important;
-}
-
-.light .loginButton {
+/* Button login styles in light mode */
+ .light .loginBtn {
     background-color: #007bff;
     color: white;
-    border: none;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
-    text-decoration: none;
     transition: background-color 0.3s;
+    margin-top: 0.5rem;
 }
 
-.light .loginButton:hover {
+.light .loginBtn:hover {
     background-color: #005fc4;
     cursor: pointer;
-}
+} 
 
-
-.dark .loginButton {
-    background-color: #747bff;
-    color: white;
-    border: none;
+/* Button login styles in dark mode */
+.dark .loginBtn {
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
-    text-decoration: none;
     transition: background-color 0.3s;
-}
-
-.dark .loginButton:hover {
-    background-color: #575bb1;
-    cursor: pointer;
+    margin-top: 0.5rem;
 }
 
 /* Link styles in light mode */
-.light .registerLink {
+.light .register-link {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s;
+    margin-left: 0.3rem;
 }
 
-.light .registerLink:hover {
+.light .register-link:hover {
     color: #005fc4;
     text-decoration: underline;
 }
 
 /* Link styles in dark mode */
-.dark .registerLink {
-    color: #747bff;
+.dark .register-link {
     text-decoration: none;
     transition: color 0.3s;
+    margin-left: 0.3rem;
 }
 
-.dark .registerLink:hover {
-    color: #575bb1;
+.dark .register-link:hover {
+    color: #137edb;
     text-decoration: underline;
 }
 
-
-.input-container {
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    /* overflow: hidden; */
-    /* Ensures that the inner elements don’t overflow the container */
+/* Light mode autofill styles for custom textfield */
+.light .custom-textfield input:-webkit-autofill {
+    background-color: #faf8f8 !important; 
+    -webkit-box-shadow: 0 0 0 1000px #faf8f8 inset !important; 
+    -webkit-text-fill-color: black !important;
+    border-radius: 0 !important; 
 }
 
-/* Dark mode styles for input container */
-.dark .input-container {
-    background-color: #444;
-    color: white;
+/* Dark mode autofill styles for custom textfield */
+.dark .custom-textfield input:-webkit-autofill {
+    background-color: #555 !important; 
+    -webkit-box-shadow: 0 0 0 1000px #555 inset !important; 
+    -webkit-text-fill-color: white !important;
+    border-radius: 0 !important;
 }
 
-/* Light mode styles for input container */
-.light .input-container {
-    background-color: #eaeaea;
-    color: black;
+/* bg color of the textfield in light mode */
+.light .custom-textfield .MuiOutlinedInput-root  {
+    background-color: #faf8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-size: 1.2rem; 
+    padding: 12px 14px; 
+    height: 60px; 
 }
 
-.input-container .icon {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* bg color of the textfield in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root  {
+    background-color: #555;   
+    box-shadow: 0 4px 8px rgba(213, 213, 213, 0.1);
+    font-size: 1.2rem; 
+    padding: 12px 14px; 
+    height: 60px; 
 }
 
-.input-container .input-field {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: inherit;
-    padding: 10px;
-    width: 100%;
+/* Change border color on hover in light mode */
+.light .custom-textfield .MuiOutlinedInput-root:hover fieldset {
+    border-color: #0073e6;  
+}
+
+/* Change border color on hover in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root:hover fieldset {
+    border-color: lightblue;  
+}
+
+/* Change border color when focused in light mode */
+.light .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: #0073e6;  
+}
+
+/* Change border color when focused in dark mode */
+.dark .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: lightblue; 
+}
+
+/* Change text color in light mode */
+.light .custom-textfield input {
+    color: #000;  
+}
+
+/* Change text color in light mode */
+.dark .custom-textfield input {
+    color: #fff;  
 }
