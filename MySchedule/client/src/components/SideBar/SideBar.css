@@ -1,0 +1,39 @@
+/* Sidebar.css */
+
+/* General sidebar styles */
+.sidebar-icon-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: var(--icon-color, black);
+    z-index: 1000;
+    font-size: 2rem;
+  }
+  
+  .drawer {
+    width: 250px;
+  }
+  
+  .sidebar-logo {
+    width: 80%;
+    max-width: 250px; /* Set a maximum width for the logo */
+    height: auto;
+  }
+  
+  /* Styles for small screens (up to 600px) */
+  @media (max-width: 600px) {
+    .sidebar-icon-button {
+      top: 5px;
+      left: 5px;
+      font-size: 1.5rem; /* Smaller icon size for small screens */
+    }
+  
+    .drawer {
+      width: 60%; /* Adjust drawer width for small screens */
+    }
+  
+    .sidebar-logo {
+      width: 60%; /* Adjust logo size for small screens */
+    }
+  }
+  

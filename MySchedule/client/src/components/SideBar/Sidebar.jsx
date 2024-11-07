@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Drawer, Box, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { useLoginContext } from './LoginContext';
-import { useThemeContext } from './ThemeContext';
+import { useLoginContext } from '../LoginContext';
+import { useThemeContext } from '../ThemeContext';
 
 const Sidebar = ({ open, onClose, toggleSidebar }) => {
   const navigate = useNavigate();
