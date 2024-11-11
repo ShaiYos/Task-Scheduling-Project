@@ -7,7 +7,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ModeToggle from './components/ModeToggle';
 import Box from '@mui/material/Box';
 import { useLoginContext } from './components/LoginContext.jsx';
-import Sidebar from './components/Sidebar.jsx';
+import Sidebar from './components/SideBar/Sidebar.jsx';
 import HomePage from '../pages/HomePage/HomePage';
 import MotivationQuotesPage from '../pages/MotivationalQuotesPage/MotivationalQuotesPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage.jsx';
