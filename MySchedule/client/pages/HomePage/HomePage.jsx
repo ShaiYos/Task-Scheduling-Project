@@ -1,151 +1,71 @@
-// HomePage.js
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, IconButton } from '@mui/material';
-import { useThemeContext } from '../../src/components/ThemeContext';
-import { useNavigate } from 'react-router-dom'; // To handle navigation
+import React from 'react';
+import { Box, Typography, Button, Container, Grid, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useThemeContext } from '../../src/components/ThemeContext'; // Correct import of ThemeContext
+import Feature from '../../src/components/Feature/Feature'; // Correct path to Feature component
+import './HomePage.css';
 
 const HomePage = () => {
-  const { mode } = useThemeContext(); // Get the mode from the context
-  const [username, setUsername] = useState('');
-  const navigate = useNavigate(); // Navigation hook
+  const { mode } = useThemeContext(); // Access mode from ThemeContext using useContext hook
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-  }, []);
-
-  // Click handlers to navigate to respective pages
-  const goToTaskScheduling = () => navigate('/task-scheduler');
-  const goToProfile = () => navigate('/profile');
-  const goToMotivationQuotes = () => navigate('/motivation');
+  // const handleGetStarted = () => navigate('/get-started');
+  // const handleLearnMore = () => navigate('/learn-more');
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: mode === 'dark' ? '#444' : '#eaeaea',
-        color: mode === 'dark' ? '#ffffff' : '#000000',
-        padding: 20,
-      }}
-    >
-      <Typography variant="h3" gutterBottom>
-        Welcome{username ? `, ${username}` : ''}!
-      </Typography>
-      <Typography variant="h4" gutterBottom>
-        Manage your tasks efficiently and effectively.
-      </Typography>
-      
-      {/* Image grid for navigation */}
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 6, // Increased gap between images
-          mt: 5,
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* Task Scheduling Image */}
-        <IconButton
-          onClick={goToTaskScheduling}
-          disableRipple // Disable ripple effect
-          sx={{
-            flexDirection: 'column',
-            alignItems: 'center',
-            '&:hover img, &:hover .text': {
-              transform: 'scale(1.1)', // Scale up on hover
-            },
-            transition: 'transform 0.3s ease', // Smooth transition for the button
-          }}
-        >
-          <img
-            src="/tasks.jpg" // Replace with your image path
-            alt="Task Scheduling"
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: '8px',
-              transition: 'transform 0.3s ease', // Smooth transition for image
-            }}
-          />
-          <Typography
-            variant="body1"
-            sx={{ mt: 1.5, transition: 'transform 0.3s ease', fontSize: '1rem' }} // Increased margin-top for text
-            className="text" // Added class name for hover scaling
+    <Box className={`homepage ${mode}`}>
+      {/* Hero Section */}
+      <Container maxWidth="lg" className="hero-section">
+        <Typography variant="h2" className="hero-title">
+          Organize Your Life, Connect with Your Goals
+        </Typography>
+        <Typography variant="h6" className="hero-subtitle">
+          A simple, powerful tool to manage tasks and achieve more.
+        </Typography>
+        {/* <Box className="cta-buttons">
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleLearnMore}
+            className="cta-button"
           >
-            Task Scheduling
-          </Typography>
-        </IconButton>
+            Learn More
+          </Button>
+        </Box> */}
+      </Container>
 
-        {/* Profile Image */}
-        <IconButton
-          onClick={goToProfile}
-          disableRipple // Disable ripple effect
-          sx={{
-            flexDirection: 'column',
-            alignItems: 'center',
-            '&:hover img, &:hover .text': {
-              transform: 'scale(1.1)', // Scale up on hover
-            },
-            transition: 'transform 0.3s ease', // Smooth transition for the button
-          }}
-        >
-          <img
-            src="/user.png"
-            alt="Profile"
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: '8px',
-              transition: 'transform 0.3s ease', // Smooth transition for image
-            }}
-          />
-          <Typography
-            variant="body1"
-            sx={{ mt: 1.5, transition: 'transform 0.3s ease', fontSize: '1rem' }} // Increased margin-top for text
-            className="text" // Added class name for hover scaling
-          >
-            Profile
-          </Typography>
-        </IconButton>
-
-        {/* Motivation Quotes Image */}
-        <IconButton
-          onClick={goToMotivationQuotes}
-          disableRipple // Disable ripple effect
-          sx={{
-            flexDirection: 'column',
-            alignItems: 'center',
-            '&:hover img, &:hover .text': {
-              transform: 'scale(1.1)', // Scale up on hover
-            },
-            transition: 'transform 0.3s ease', // Smooth transition for the button
-          }}
-        >
-          <img
-            src="/motivation.jpeg" // Replace with your image path
-            alt="Motivation Quotes"
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: '8px',
-              transition: 'transform 0.3s ease', // Smooth transition for image
-            }}
-          />
-          <Typography
-            variant="body1"
-            sx={{ mt: 1.5, transition: 'transform 0.3s ease', fontSize: '1rem' }} // Increased margin-top for text
-            className="text" // Added class name for hover scaling
-          >
-            Motivation Quotes
-          </Typography>
-        </IconButton>
-      </Box>
+      {/* Features Section */}
+      <Container maxWidth="lg" className="features-section">
+        <Grid container spacing={4} justifyContent="space-between">
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={3} className="feature-card">
+              <Feature
+                imageSrc="/tasks.jpg"
+                title="Task Scheduling"
+                description="Easily schedule tasks and stay organized."
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={3} className="feature-card">
+              <Feature
+                imageSrc="/user.png"
+                title="Profile Management"
+                description="View and manage your profile settings and preferences."
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={3} className="feature-card">
+              <Feature
+                imageSrc="/motivation.jpeg"
+                title="Motivational Quotes"
+                description="Stay inspired with daily motivational quotes."
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   );
 };

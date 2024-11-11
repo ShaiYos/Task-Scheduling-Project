@@ -4,6 +4,7 @@
 .login-page-container.light {
     background-color: #eaeaea;
 }
+
 .login-page-container.dark {
     background-color: #333;
     color: #fff;
@@ -16,7 +17,7 @@
 }
 
 /* Button login styles in light mode */
- .light .loginBtn {
+.light .loginBtn {
     background-color: #007bff;
     color: white;
     border-radius: 5px;
@@ -29,7 +30,7 @@
 .light .loginBtn:hover {
     background-color: #005fc4;
     cursor: pointer;
-} 
+}
 
 /* Button login styles in dark mode */
 .dark .loginBtn {
@@ -67,64 +68,64 @@
 
 /* Light mode autofill styles for custom textfield */
 .light .custom-textfield input:-webkit-autofill {
-    background-color: #faf8f8 !important; 
-    -webkit-box-shadow: 0 0 0 1000px #faf8f8 inset !important; 
+    background-color: #faf8f8 !important;
+    -webkit-box-shadow: 0 0 0 1000px #faf8f8 inset !important;
     -webkit-text-fill-color: black !important;
-    border-radius: 0 !important; 
+    border-radius: 0 !important;
 }
 
 /* Dark mode autofill styles for custom textfield */
 .dark .custom-textfield input:-webkit-autofill {
-    background-color: #555 !important; 
-    -webkit-box-shadow: 0 0 0 1000px #555 inset !important; 
+    background-color: #555 !important;
+    -webkit-box-shadow: 0 0 0 1000px #555 inset !important;
     -webkit-text-fill-color: white !important;
     border-radius: 0 !important;
 }
 
 /* bg color of the textfield in light mode */
-.light .custom-textfield .MuiOutlinedInput-root  {
+.light .custom-textfield .MuiOutlinedInput-root {
     background-color: #faf8f8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    font-size: 1.2rem; 
-    padding: 12px 14px; 
-    height: 60px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    padding: 12px 14px;
+    height: 60px;
 }
 
 /* bg color of the textfield in dark mode */
-.dark .custom-textfield .MuiOutlinedInput-root  {
-    background-color: #555;   
+.dark .custom-textfield .MuiOutlinedInput-root {
+    background-color: #555;
     box-shadow: 0 4px 8px rgba(213, 213, 213, 0.1);
-    font-size: 1.2rem; 
-    padding: 12px 14px; 
-    height: 60px; 
+    font-size: 1.2rem;
+    padding: 12px 14px;
+    height: 60px;
 }
 
 /* Change border color on hover in light mode */
 .light .custom-textfield .MuiOutlinedInput-root:hover fieldset {
-    border-color: #0073e6;  
+    border-color: #0073e6;
 }
 
 /* Change border color on hover in dark mode */
 .dark .custom-textfield .MuiOutlinedInput-root:hover fieldset {
-    border-color: lightblue;  
+    border-color: lightblue;
 }
 
 /* Change border color when focused in light mode */
 .light .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
-    border-color: #0073e6;  
+    border-color: #0073e6;
 }
 
 /* Change border color when focused in dark mode */
 .dark .custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
-    border-color: lightblue; 
+    border-color: lightblue;
 }
 
 /* Change text color in light mode */
 .light .custom-textfield input {
-    color: #000;  
+    color: #000;
 }
 
 /* Change text color in light mode */
 .dark .custom-textfield input {
-    color: #fff;  
+    color: #fff;
 }
