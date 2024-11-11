@@ -10,23 +10,21 @@ const Sidebar = ({ open, onClose, toggleSidebar }) => {
   const { loggedIn, logoutUser } = useLoginContext();
   const { mode } = useThemeContext();
 
-  // local state to control the logged-in state in Sidebar
   const [isLoggedIn, setIsLoggedIn] = useState(loggedIn);
 
-  // Update local state whenever loggedIn in context changes
   useEffect(() => {
     setIsLoggedIn(loggedIn);
   }, [loggedIn]);
 
   const handleNavigation = (path) => {
     if (path === '/logout') {
-      logoutUser(); // Call logoutUser to update the state
-      setIsLoggedIn(false); // Immediately update the local state
-      onClose(); // Close the sidebar
-      navigate('/'); // Navigate to the landing page
+      logoutUser();
+      setIsLoggedIn(false);
+      onClose();
+      navigate('/');
     } else {
-      navigate(path); // Navigate to the specified path
-      onClose(); // Close the sidebar after navigation
+      navigate(path);
+      onClose();
     }
   };
 
@@ -36,11 +34,11 @@ const Sidebar = ({ open, onClose, toggleSidebar }) => {
         onClick={toggleSidebar}
         sx={{
           position: 'fixed',
-          top: '10px',
-          left: '10px',
+          top: { xs: '1rem', sm: '1.5rem' },
+          left: { xs: '1rem', sm: '1.5rem' },
           color: mode === 'light' ? 'black' : 'white',
           border: 'none',
-          borderRadius: '5px',
+          borderRadius: '50%',
           cursor: 'pointer',
           zIndex: 1000,
         }}
@@ -50,31 +48,45 @@ const Sidebar = ({ open, onClose, toggleSidebar }) => {
       <Drawer anchor="left" open={open} onClose={onClose}>
         <Box
           sx={{
-            width: 250,
-            padding: 2,
+            width: { xs: '12.5rem', sm: '15rem', md: '18.75rem' },
+            padding: { xs: '1rem', sm: '1.25rem' },
             display: 'flex',
             flexDirection: 'column',
-            height: '100%',
+            height: {
+              xs: '100vh',       // Full height on smaller screens
+              // sm: '90vh',        // Slightly shorter height on medium screens
+              // md: '80vh',        // Even shorter on larger screens
+            },
             bgcolor: 'background.default',
+            overflowY: 'auto',   // Adds scrolling if content exceeds height
           }}
         >
-          {/* Logo at the top */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}>
-            <img src={'./logo.png'} alt="App Logo" style={{ width: '80%', height: 'auto' }} />
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
+            <img
+              src={'./logo.png'}
+              alt="App Logo"
+              style={{
+                width: '80%',
+                maxWidth: '15rem',
+                height: 'auto',
+              }}
+            />
           </Box>
           <List>
-            {(isLoggedIn ? [ // If the user is logged in, show these links
-              { text: 'Home', path: '/home' },
-              { text: 'Profile', path: '/profile' },
-              { text: 'Task Scheduler', path: '/task-scheduler' },
-              { text: 'Motivational Quotes', path: '/motivation' },
-              { text: 'Logout', path: '/logout' }
-            ] : [ // If the user is not logged in, show these links
-              { text: 'Landing Page', path: '/' },
-              { text: 'Login', path: '/login' },
-              { text: 'Sign Up', path: '/register' }
-            ]) // Map over the selected links
-            .map(({ text, path }) => (
+            {(isLoggedIn
+              ? [
+                { text: 'Home', path: '/home' },
+                { text: 'Profile', path: '/profile' },
+                { text: 'Task Scheduler', path: '/task-scheduler' },
+                { text: 'Motivational Quotes', path: '/motivation' },
+                { text: 'Logout', path: '/logout' },
+              ]
+              : [
+                { text: 'Landing Page', path: '/' },
+                { text: 'Login', path: '/login' },
+                { text: 'Sign Up', path: '/register' },
+              ]
+            ).map(({ text, path }) => (
               <ListItem button='true' key={text} onClick={() => handleNavigation(path)}>
                 <ListItemText primary={text} />
               </ListItem>

@@ -1,15 +1,16 @@
 #root {
-  /* max-width: 1280px; */
+  max-width: 90vw;
+  /* Limits the width to 90% of viewport on large screens */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   font-family: 'roboto', sans-serif;
   /* min-height: 100vh; */
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
 }
 
-@keyframes logo-spin {
+/* @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -35,8 +36,74 @@
 
 .MuiBox-root {
   align-items: center;
-  /* display: flex; */
-  /* flex-direction: column; */
   justify-content: center;
 
+} */
+
+/* Widescreen adjustments */
+@media (min-width: 1280px) {
+  #root {
+    max-width: 1280px;
+    /* Caps width to prevent stretching */
+    flex-direction: row;
+    /* Side-by-side layout on wide screens */
+    justify-content: center;
+  }
+
+  .card {
+    padding: 2em 3em;
+    /* Adds more padding for widescreen aesthetics */
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+/* Responsive Font Size */
+.read-the-docs {
+  color: #888;
+  font-size: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .read-the-docs {
+    font-size: 1.2rem;
+    /* Increases font size slightly on larger screens */
+  }
+}
+
+.MuiBox-root {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  #root {
+    padding: 1rem;
+    /* Reduces padding for smaller screens */
+  }
+
+  .card {
+    padding: 1.5em;
+    /* Adjusts padding for mobile readability */
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
