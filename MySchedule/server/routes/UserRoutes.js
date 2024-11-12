@@ -1,8 +1,7 @@
 
 
 import express from "express"
-import { createUser, loginUser , getUserProfile} from "../controllers/UserController.js"
-import { get } from "mongoose"
+import { createUser, loginUser, getUserProfile, checkUsernameAvailability, updateUserProfile } from "../controllers/UserController.js"
 
 const router = express.Router()
 
@@ -16,5 +15,11 @@ router.post("/register", createUser)
 
 // Route to get user profile by ID
 router.get("/profile/:id", getUserProfile)
+
+// PUT request to update user profile by ID
+router.put("/profile/:userId", updateUserProfile);
+
+// Route to check if a username is available
+router.get("/check-username/:username", checkUsernameAvailability);
 
 export default router

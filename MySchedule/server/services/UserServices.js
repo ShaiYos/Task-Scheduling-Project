@@ -10,27 +10,15 @@ export const createUserService = async (user) => UserModel.create(user);
 
 // service to check if the username is unique
 export const getUserByUsernameService = async (username) => {
-  console.log("Username to fetch:", username);
-  try {
-      if (!username) {
-          throw new Error('Username is required');
-      }
-      
-      const user = await UserModel.findOne({ username });
-      
-      if (!user) {
-          console.log("User not found for username:", username);
-          return null; // Handle as appropriate
-      }
+    return await UserModel.findOne({ username });
+}
 
-      console.log("User found:", user); // Log found user
-      return user;
-  } catch (error) {
-      console.error("Error finding user by username:", error);
-      throw new Error('Could not fetch user');
-  }
-};
-
+// service to get user details (minus password) by his id 
 export const getUserDetailsService = async (userId) => {
     return await UserModel.findById(userId).select('-password'); // Return the result
+};
+
+// service to update user details
+export const updateUserProfileService = async (userId, updateData) => {
+    return await UserModel.findByIdAndUpdate(userId, updateData, { new: true });
 };

@@ -9,6 +9,9 @@ const HomePage = () => {
   const { mode } = useThemeContext(); // Access mode from ThemeContext using useContext hook
   const navigate = useNavigate();
 
+  const goToTaskScheduling = () => navigate('/task-scheduler');
+  const goToProfileManagement = () => navigate('/profile');
+  const goToMotivationalQuotes = () => navigate('/motivation');
   // const handleGetStarted = () => navigate('/get-started');
   // const handleLearnMore = () => navigate('/learn-more');
 
@@ -38,7 +41,7 @@ const HomePage = () => {
       <Container maxWidth="lg" className="features-section">
         <Grid container spacing={4} justifyContent="space-between">
           <Grid item xs={12} sm={4}>
-            <Paper elevation={3} className="feature-card">
+            <Paper elevation={3} className="feature-card" onClick={goToTaskScheduling} sx={{ cursor: 'pointer' }}>
               <Feature
                 imageSrc="/tasks.jpg"
                 title="Task Scheduling"
@@ -47,7 +50,7 @@ const HomePage = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Paper elevation={3} className="feature-card">
+            <Paper elevation={3} className="feature-card" onClick={goToProfileManagement} sx={{ cursor: 'pointer' }}>
               <Feature
                 imageSrc="/user.png"
                 title="Profile Management"
@@ -56,7 +59,7 @@ const HomePage = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Paper elevation={3} className="feature-card">
+            <Paper elevation={3} className="feature-card" onClick={goToMotivationalQuotes} sx={{ cursor: 'pointer' }}>
               <Feature
                 imageSrc="/motivation.jpeg"
                 title="Motivational Quotes"

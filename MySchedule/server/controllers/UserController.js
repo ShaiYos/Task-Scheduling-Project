@@ -1,10 +1,15 @@
 import { hashPassword } from "../utils/hashPassword.js";
-import { createUserService, getUserByUsernameService , getUserDetailsService } from "../services/UserServices.js";
+import {
+    createUserService,
+    getUserByUsernameService,
+    getUserDetailsService,
+    updateUserProfileService
+} from "../services/UserServices.js";
 import { serverResponse } from "../utils/serverResponse.js";
-import { comparePasswords } from "../utils/comparePaswwords.js";
+import { comparePasswords } from "../utils/comparePasswords.js";
 
 
-
+// Create new user
 export const createUser = async (req, res) => {
     console.log("Registration request received:", req.body); // Check the request body
     try {
@@ -13,7 +18,7 @@ export const createUser = async (req, res) => {
         // Check if user already exists
         const existingUser = await getUserByUsernameService(username);
         if (existingUser) {
-            return res.status(409).json({ error: 'User already exists' });
+            return serverResponse(res, 409, { error: 'User already exists' });
         }
 
         // If not exist, create new user
@@ -29,17 +34,17 @@ export const createUser = async (req, res) => {
         console.log('New user created:', newUser);
 
         // Respond with the newly created user
-        res.status(201).json(newUser);
+        serverResponse(res, 201, newUser);
     } catch (error) {
         console.error('Error creating user:', error);
-        res.status(500).json({ error: 'Server error' });
+        serverResponse(res, 500, { error: 'Server error' });
     }
 };
 
-
+// Login user
 export const loginUser = async (req, res) => {
     console.log("Login request received:", req.body);
-    
+
     try {
         const { username, password } = req.body;
 
@@ -65,22 +70,59 @@ export const loginUser = async (req, res) => {
         }
 
         // If authentication is successful, respond with user data (avoid sending password)
-        return serverResponse(res, 200, { message: "Login successful", userId: user._id });
+        serverResponse(res, 200, { message: "Login successful", userId: user._id });
     } catch (error) {
         console.error("Error in loginUser:", error);
-        return serverResponse(res, 500, error.message);
+        serverResponse(res, 500, error.message);
     }
 };
 
+// Get user profile
 export const getUserProfile = async (req, res) => {
     try {
         const user = await getUserDetailsService(req.params.id); // Await the service call
         console.log("User found:", user); // Log the user found
         if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+            return serverResponse(res, 404, { error: 'User not found' });
         }
-        res.json(user);
+        serverResponse(res, 200, user);
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error("Error fetching user profile:", error);
+        serverResponse(res, 500, { error: 'Server error' });
     }
-}
+};
+
+// Update user profile
+export const updateUserProfile = async (req, res) => {
+    console.log("Received update request for user:", req.params.userId);
+    console.log("Update data:", req.body);
+    const userId = req.params.userId;
+    const updateData = req.body;
+    console.log("Update request received:", updateData);
+
+    try {
+        const existingUser = await getUserByUsernameService(updateData.username);
+        if (existingUser && existingUser._id.toString() !== userId) {
+            return serverResponse(res, 400, { message: "Username is already taken" });
+        }
+
+        const updatedUser = await updateUserProfileService(userId, updateData);
+        serverResponse(res, 200, updatedUser);
+    } catch (error) {
+        console.error("Error updating user profile:", error);
+        serverResponse(res, 500, { message: "Error updating user profile" });
+    }
+};
+
+// Check username availability
+export const checkUsernameAvailability = async (req, res) => {
+    const username = req.params.username;
+    try {
+        const existingUser = await getUserByUsernameService(username);
+        const isAvailable = !existingUser;
+        serverResponse(res, 200, { isAvailable });
+    } catch (error) {
+        console.error("Error checking username availability:", error);
+        serverResponse(res, 500, { message: "Error checking username availability" });
+    }
+};
