@@ -5,9 +5,8 @@ export const addTaskService = async (userId, description, date) => {
     console.log(`Adding task for userId: ${userId}, description: ${description}, date: ${date}`);
     const newTask = new TaskModel({
         description,
-        dueDate: new Date(date), // Ensure date is a Date object without adding 3 hours
-        finished: false, // New tasks are not finished by default
-        userId, // Reference to the user who created the task
+        dueDate: new Date(date),
+        userId: mongoose.Types.ObjectId(userId), // Ensures userId is stored as an ObjectId
     });
 
     return await newTask.save(); // Save and return the new task

@@ -1,51 +1,71 @@
+/* MotivationalQuotesPage.css */
 
 .motivation-page-container {
-  padding: 4rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-
-.motivation-page-container h4 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
- .motivation-page-container.dark h4 {
-    color: #fff;
-}
-
-
-.motivation-page-container .quote-text {
-  font-size: 1.75rem;
-  font-style: italic;
-  color: #555;
-  margin: 1rem 0;
-}
-
-.motivation-page-container.dark .quote-text {
-  color: #ddd;
-} 
-
-.motivation-page-container .quote-author {
-  font-size: 1.2rem;
-  color: #777;
-  margin-top: 0.5rem;
-}
-
-.motivation-page-container.dark .quote-author {
-  color: #aaa;
-}
-
-
-.motivation-page-container .fetch-quote-btn {
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 1.5rem;
+  /* min-height: 100vh; */
+  text-align: center;
   transition: background-color 0.3s ease;
 }
 
+.motivation-page-container.light {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.motivation-page-container.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.light .quote-text {
+  color: #333;
+}
+
+.dark .quote-text {
+  color: #fafafa;
+}
+
+.quote-author {
+  font-size: 1rem;
+  font-weight: 400;
+  /* color: #888; */
+  margin-top: 8px;
+}
+
+.light .quote-author {
+  color: #555;
+}
+
+.dark .quote-author {
+  color: #ccc;
+}
+
+.fetch-quote-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: none;
+}
+
+.light .fetch-quote-btn.MuiButton-containedPrimary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.light .fetch-quote-btn.MuiButton-containedPrimary:hover {
+  background-color: #005fc4;
+}

@@ -1,188 +1,147 @@
 import React, { useState, useEffect } from 'react';
-import { useThemeContext } from '../../src/components/ThemeContext';
-import { AddTaskForm, EditTaskForm } from '../../src/components/TaskForms';
-import TaskCalendar from '../../src/components/TaskCalendar/TaskCalendar';
-import { useLoginContext } from '../../src/components/LoginContext'; // Import useLoginContext
-import Box from '@mui/material/Box'; 
+import CustomCalendar from '../../src/components/CustomCalendar/CustomCalendar'; // Adjust this path
+import CustomDialog from '../../src/components/CustomDialog';
+import AddTaskForm from '../../src/components/AddTaskForm'; // Adjust this path
+import EditTaskForm from '../../src/components/EditTaskForm'; // Adjust this path
+import { Box } from '@mui/material';
+import { useThemeContext } from "../../src/components/ThemeContext";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
-import './TaskSchedulerPage.css';
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Backend URL from environment variables
 
 const TaskSchedulerPage = () => {
+    const [tasks, setTasks] = useState([]); // State to hold tasks
+    const [showAddForm, setShowAddForm] = useState(false); // To show AddTaskForm
+    const [showEditForm, setShowEditForm] = useState(false); // To show EditTaskForm
+    const [selectedTask, setSelectedTask] = useState(null); // Selected task for editing
+
     const { mode } = useThemeContext();
-    const { userId, loggedIn } = useLoginContext(); // Get userId and loggedIn from context
-    const [tasks, setTasks] = useState([]);
-    const [editingIndex, setEditingIndex] = useState(null);
-    const [editingTask, setEditingTask] = useState('');
-    const [editingDueDate, setEditingDueDate] = useState('');
-    const [isAddFormVisible, setAddFormVisible] = useState(false);
-    const [isEditFormVisible, setEditFormVisible] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(null);
-    const navigate = useNavigate(); // Hook to navigate to another route
 
+    // Fetch tasks from the database on component mount
     useEffect(() => {
-        if (!loggedIn) {
-            navigate('/'); // Navigate to the landing page if not logged in
-        }
-    }, [loggedIn, navigate]);
-
-    useEffect(() => {
-        // Load tasks from localStorage if available
-        const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-        if (savedTasks) {
-            setTasks(savedTasks);
-        }
-
-        // Fetch tasks from backend when userId changes
         const fetchTasks = async () => {
-            if (userId) {
-                try {
-                    const response = await axios.get(`${BACKEND_URL}/api/task/task-scheduler`, {
-                        params: { userId } // Pass userId as query parameter
-                    });
-                    const fetchedTasks = response.data.map(task => ({
-                        ...task,
-                        dueDate: new Date(task.dueDate)  // Convert string back to Date object
-                    }));
-                    setTasks(fetchedTasks);
-                    localStorage.setItem('tasks', JSON.stringify(fetchedTasks)); // Save to localStorage
-                } catch (error) {
-                    console.error('Error fetching tasks:', error);
-                }
+            try {
+                const response = await axios.get('/api/tasks', {
+                    params: { userId: localStorage.getItem('userId') }
+                });
+                setTasks(response.data);
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+                // Show an error message to the user
             }
         };
 
         fetchTasks();
-    }, [userId]); // Ensure tasks are fetched when userId changes
+    }, []);
 
-    const handleAddTask = async (description, dueDate) => {
-        const task = { description, dueDate: new Date(dueDate), finished: false, userId };
+    // Add a new task and save to the database
+    const handleAddTask = async (newTask) => {
+        const userId = localStorage.getItem('userId');
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/task/task-scheduler`, task);
-            const newTask = response.data;
-            const updatedTasks = [...tasks, newTask];
-            setTasks(updatedTasks);
-            setAddFormVisible(false);  // Hide the form after submission
+            // Send the new task to the server
+            const response = await axios.post('/api/task/addTask', {
+                ...newTask,
+                userId
+            });
+
+            // Update state with the saved task from the server (including the ID from DB)
+            setTasks([...tasks, response.data]);
+            setShowAddForm(false); // Hide the AddTaskForm after submission
         } catch (error) {
             console.error('Error adding task:', error);
         }
     };
 
-    const handleEditTask = async (description, dueDate, userId) => {
-        if (editingIndex !== null) {
-            const taskToUpdate = tasks[editingIndex];
-            const updatedTask = { ...taskToUpdate, description, dueDate: new Date(dueDate), userId };
-            try {
-                const response = await axios.put(`${BACKEND_URL}/api/task/task-scheduler/${taskToUpdate._id}`, updatedTask);
-                const updatedTasks = tasks.map((task, index) =>
-                    index === editingIndex ? response.data : task
-                );
-                setTasks(updatedTasks);
-                setEditingIndex(null);
-                setEditingTask('');
-                setEditingDueDate('');
-            } catch (error) {
-                console.error('Error editing task:', error);
-            }
-        }
-        setEditFormVisible(false);  // Hide the form after submission
-    };
-
-    const handleDeleteTask = async (index) => {
-        const taskToDelete = tasks[index];
+    // Edit a task and save changes to the database
+    const handleEditTask = async (updatedTask) => {
         try {
-            await axios.delete(`${BACKEND_URL}/api/task/task-scheduler/${taskToDelete._id}`);
-            const updatedTasks = tasks.filter((task, i) => i !== index);
+            // Send the updated task to the server
+            const response = await axios.put(`/api/task/editTask/${updatedTask._id}`, updatedTask);
+
+            // Update the tasks state with the updated task from the server
+            const updatedTasks = tasks.map((task) =>
+                task._id === updatedTask._id ? response.data : task
+            );
             setTasks(updatedTasks);
-            localStorage.setItem('tasks', JSON.stringify(updatedTasks));  // Save to localStorage
+            setShowEditForm(false); // Hide the EditTaskForm after submission
         } catch (error) {
-            console.error('Error deleting task:', error);
+            console.error('Error updating task:', error);
         }
     };
 
-    const handleDateClick = (date) => {
-        if (isAddFormVisible) {
-            // If the add form is already visible, hide it on double-click
-            setAddFormVisible(false);
-        } else {
-            // Otherwise, show the add form and set the selected date
-            setSelectedDate(date.dateStr);  
-            setEditingDueDate(date.dateStr);
-            setEditFormVisible(false);  // Ensure the edit form is closed
-            setAddFormVisible(true);  // Show the form when a date is clicked
-        }
-    };
-
+    // Handle task click for editing
     const handleEventClick = (info) => {
-        const taskIndex = tasks.findIndex(task => 
-            task.description === info.event.title &&
-            new Date(task.dueDate).toISOString() === info.event.start.toISOString()
-        );
-    
-        if (taskIndex !== -1) {
-            if (editingIndex === taskIndex && isEditFormVisible) {
-                setEditFormVisible(false);  // Hide the form if the same event is clicked again
-            } else {
-                setEditingIndex(taskIndex);
-                setEditingTask(tasks[taskIndex].description);
-                const dueDate = new Date(tasks[taskIndex].dueDate);
-                setEditingDueDate(dueDate.toISOString().slice(0, 16)); // Format for input
-                setAddFormVisible(false);  // Hide the add form if it's open
-                setEditFormVisible(true);  // Show the edit form
-            }
+        const taskToEdit = tasks.find((task) => task._id === info.event.id);
+        setSelectedTask(taskToEdit);
+        setShowEditForm(true);
+    };
+
+    // Handle date click for adding a task
+    const handleDateClick = () => {
+        setShowAddForm(true);
+    };
+
+    const handleDeleteTask = async () => {
+        try {
+            await axios.delete(`/api/task-scheduler/${selectedTask._id}`);
+            setTasks(tasks.filter(task => task._id !== selectedTask._id));
+            setShowEditForm(false);
+        } catch (error) {
+            console.error("Error deleting task:", error);
         }
-    };
-
-    const handleEventDoubleClick = (info) => {
-        setEditFormVisible(false);  // Hide the form on double click
-    };
-
-    const handleEventDrop = (info) => {
-        const updatedTasks = tasks.map(task => {
-            if (task.description === info.event.title) {
-                return { ...task, dueDate: info.event.start }; // Update the due date
-            }
-            return task;
-        });
-        
-        setTasks(updatedTasks); // Update state
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Save to localStorage
     };
 
     return (
-        <Box className={`task-scheduler-container ${mode}`}>
-            <Box className="task-scheduler-box"> {/* NOTE FOR ME : the big box */} 
-                <h1>Task Scheduler</h1>
-                {isAddFormVisible && (
-                    <AddTaskForm
-                        onSubmit={handleAddTask}
-                        onClose={() => setAddFormVisible(false)}
-                        selectedDate={selectedDate}  // Pass the selected date
-                    />
-                )}
-                {isEditFormVisible && (
+        <Box className="task-shceduler-page" >
+            {/* Custom Calendar Component */}
+            <CustomCalendar
+                tasks={tasks}
+                handleDateClick={handleDateClick} // Handle adding new tasks
+                handleEventClick={handleEventClick} // Handle task click to edit
+                onEventDrop={async (info) => {
+                    const updatedTasks = tasks.map((task) =>
+                        task._id === info.event.id
+                            ? { ...task, dueDate: info.event.start }
+                            : task
+                    );
+                    setTasks(updatedTasks);
+
+                    try {
+                        // Send the updated task to the backend
+                        await axios.put(`/api/task/editTask/${info.event.id}`, {
+                            dueDate: info.event.start,
+                        });
+                    } catch (error) {
+                        console.error("Error updating task date:", error);
+                    }
+                }}
+                mode={mode} // or dark mode depending on user preference
+            />
+
+            {/* Add Task Dialog */}
+            <CustomDialog
+                open={showAddForm}
+                onClose={() => setShowAddForm(false)}
+                title="Add New Task"
+                onSubmit={handleAddTask}
+                submitLabel="Add Task"
+            >
+                <AddTaskForm onSubmit={handleAddTask} />
+            </CustomDialog>
+
+            {/* Edit Task Dialog */}
+            {selectedTask && (
+                <CustomDialog
+                    open={showEditForm}
+                    onClose={() => setShowEditForm(false)}
+                    title="Edit Task"
+                    onSubmit={() => handleEditTask(selectedTask)}
+                    submitLabel="Save Changes"
+                >
                     <EditTaskForm
+                        event={selectedTask}
                         onSubmit={handleEditTask}
-                        editingTask={editingTask}
-                        editingDueDate={editingDueDate || selectedDate}
-                        setEditingTask={setEditingTask}
-                        setEditingDueDate={setEditingDueDate}
-                        onDelete={() => handleDeleteTask(editingIndex)}
-                        onClose={() => setEditFormVisible(false)}
                     />
-                )}
-                <TaskCalendar
-                    tasks={tasks} // Pass the tasks to the TaskCalendar component
-                    handleDateClick={handleDateClick}  // Pass the date click handler
-                    handleEventClick={handleEventClick}  // Pass the event click handler
-                    handleEventDoubleClick={handleEventDoubleClick}  // Pass the event double click handler
-                    onEventDrop={handleEventDrop} // Pass the event drop handler
-                    mode={mode}
-                />
-            </Box>
+                </CustomDialog>
+            )}
         </Box>
     );
 };

@@ -18,11 +18,11 @@ const MotivationQuotesPage = () => {
     setQuote(''); // Clear the previous quote
 
     try {
-      const response = await fetch('https://api.api-ninjas.com/v1/quotes', { 
+      const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
         method: 'GET',
         headers: {
-          'X-Api-Key': import.meta.env.VITE_X_API_KEY, 
-          'Content-Type': 'application/json', 
+          'X-Api-Key': import.meta.env.VITE_X_API_KEY,
+          'Content-Type': 'application/json',
         },
       });
 
@@ -42,14 +42,14 @@ const MotivationQuotesPage = () => {
       setLoading(false);
     }
   };
- 
+
   /* Fetch the quote only once on component load */
   useEffect(() => {
     if (!hasFetchedQuote.current) {
       fetchQuote();
-      hasFetchedQuote.current = true; 
+      hasFetchedQuote.current = true;
     }
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -82,18 +82,18 @@ const MotivationQuotesPage = () => {
               <Typography className='quote-text' variant="h6" fontStyle="italic">
                 "{quote}"
               </Typography>
-              <Typography  className='quote-author' variant="subtitle1" sx={{ marginTop: 1 }}>
+              <Typography className='quote-author' variant="subtitle1" sx={{ marginTop: 1 }}>
                 - {author}
               </Typography>
             </Box>
           )}
 
-          <Button 
+          <Button
             className='fetch-quote-btn'
-            variant="contained" 
-            color="primary" 
+            variant="contained"
+            color="primary"
             onClick={fetchQuote}
-            sx={{ marginTop: 2 }}
+            sx={{ marginTop: 5 }}
           >
             Get Another Quote
           </Button>

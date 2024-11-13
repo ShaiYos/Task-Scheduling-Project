@@ -4,10 +4,10 @@ import { addTask, editTask, markTaskAsFinished, deleteTask, getAllTasks } from "
 const router = express.Router();
 
 // Route to add a new task
-router.post("/task-scheduler", addTask);
+router.post("/addTask", addTask);
 
 // Route to edit an existing task
-router.put("/task-scheduler/:id", editTask);
+router.put("/editTask/:id", editTask);
 
 // Route to mark a task as finished
 router.patch("/task-scheduler/:id/finish", markTaskAsFinished);

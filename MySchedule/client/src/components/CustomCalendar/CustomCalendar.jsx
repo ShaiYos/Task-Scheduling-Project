@@ -6,25 +6,37 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useLoginContext } from '../LoginContext'; // Import useLoginContext
 import Box from '@mui/material/Box'; // Import Box from Material-UI
 
-import './TaskCalendar.css';
+// import './CustomCalendar.css';
 
-const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDoubleClick, mode, onEventDrop }) => {
+const CustomCalendar = ({ tasks, handleDateClick, handleEventClick, mode, onEventDrop }) => {
     const calendarRef = useRef(null);
     const { userId } = useLoginContext(); // Get userId from context
+    const filteredTasks = Array.isArray(tasks) ? tasks.filter(task => task.dueDate) : [];
 
     return (
+        <Box className={`calendar-container ${mode}`}
+            sx={{
+                height: '85vh',         // Adjust to fit most of the screen height
+                width: '95vw',          // Adjust to fit most of the screen width
+                maxWidth: '100vw',      // Cap at full viewport width
+                maxHeight: '100vh',     // Cap at full viewport height
+                margin: '0 auto',       // Center horizontally
+                overflow: 'auto',       // Add scrolling if needed
+                boxSizing: 'border-box', // Prevent overflow from padding/border
+                padding: 2,             // Optional padding for spacing
+            }}
+        >
             <FullCalendar
                 ref={calendarRef}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
-                selectable={true}
+                selectable
                 dateClick={handleDateClick}
                 eventClick={handleEventClick}
-                eventDrop={onEventDrop} // Add the eventDrop handler here
-                eventDoubleClick={handleEventDoubleClick}
-                timeZone= 'Asia/Jerusalem'
-                events={tasks
-                    .filter(task => task.userId === userId) // Filter tasks by userId
+                eventDrop={onEventDrop}
+                timeZone="Asia/Jerusalem"
+                events={filteredTasks
+                    .filter(task => task.userId === userId)
                     .map(task => ({
                         title: task.description,
                         start: new Date(task.dueDate),
@@ -41,13 +53,14 @@ const TaskCalendar = ({ tasks, handleDateClick, handleEventClick, handleEventDou
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 }}
-                editable={true}
-                eventStartEditable={true}
-                eventResizableFromStart={true}
-                height={'600px'}
+                editable
+                eventStartEditable
+                eventResizableFromStart
+                height="100%" // Full height of the container
                 className={mode}
             />
+        </Box>
     );
 };
 
-export default TaskCalendar;
+export default CustomCalendar;
