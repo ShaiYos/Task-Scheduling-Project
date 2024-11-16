@@ -15,6 +15,8 @@ const TaskSchedulerPage = () => {
 
     const { mode } = useThemeContext();
 
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
     // Fetch tasks from the database on component mount
     useEffect(() => {
         const fetchTasks = async () => {
@@ -37,7 +39,7 @@ const TaskSchedulerPage = () => {
         const userId = localStorage.getItem('userId');
         try {
             // Send the new task to the server
-            const response = await axios.post('/api/task/addTask', {
+            const response = await axios.post(`${BACKEND_URL}/api/task/addTask`, {
                 ...newTask,
                 userId
             });

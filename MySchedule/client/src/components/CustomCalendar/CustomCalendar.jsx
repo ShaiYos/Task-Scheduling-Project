@@ -57,7 +57,6 @@ const CustomCalendar = ({ tasks, handleDateClick, handleEventClick, mode, onEven
                 eventStartEditable
                 eventResizableFromStart
                 height="100%" // Full height of the container
-                className={mode}
             />
         </Box>
     );

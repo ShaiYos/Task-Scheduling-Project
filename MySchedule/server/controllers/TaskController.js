@@ -4,12 +4,18 @@ import { addTaskService, editTaskService, markTaskAsFinishedService, deleteTaskS
 export const addTask = async (req, res) => {
     try {
         const { userId, description, dueDate } = req.body;
-        console.log(`Request to add task: userId=${userId}, description=${description}, dueDate=${dueDate}`);
+
+        if (!userId || !description || !dueDate) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
+        console.log(`Adding task: userId=${userId}, description=${description}, dueDate=${dueDate}`);
         const newTask = await addTaskService(userId, description, dueDate);
+
         res.status(201).json(newTask);
     } catch (error) {
-        console.error('Error adding task:', error);
-        res.status(500).json({ message: error.message });
+        console.error('Error adding task:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 };
 
